@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Aggregator</title>
+</head>
+<body>
+
+    <h1>Hacker News Articles</h1>
+    <ul>
+        {% for article in hacker_news_articles %}
+        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

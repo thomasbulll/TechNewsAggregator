@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+from flask import Flask, render_template
 
+app = Flask(__name__)
 
 # def getBbcNewsResutls():
 #     url = "https://www.bbc.co.uk/news/technology"
@@ -16,28 +18,33 @@ from bs4 import BeautifulSoup
 # def extractBbcNewsComments(url):
 #     url = "https://www.bbc.co.uk" + url
 #     print("BBC: \n{url}\n")
-
+    
 def getHackerNewsResults():
     url = "https://news.ycombinator.com/"
     try:
         response = requests.get(url)
         if response.status_code == 200:
-                page_content = response.text
-                soup = BeautifulSoup(page_content, "html.parser")
-                articles = soup.find_all("tr", class_="athing")
-                # subline = soup.find_all("span", class_="subline")
-                for i in range(0, 10):
-                    # Extract title and url to article
-                    titlelink = articles[i].find("span", class_="titleline")
-                    if titlelink:
-                        title = titlelink.find("a")
-                        if title:
-                            wordTitle = title.text
-                            titleUrl = title["href"]
-                            print(f"{wordTitle}\n{titleUrl}\n")
-                    else:
-                        print("Title nor link not found")
-                    
+            page_content = response.text
+            soup = BeautifulSoup(page_content, "html.parser")
+            articles = soup.find_all("tr", class_="athing")
+            # subline = soup.find_all("span", class_="subline")
+            # Create a list to store articles (dictionaries)
+            hacker_news_articles = []
+            for i in range(0, 10):
+                # Extract title and url
+                titlelink = articles[i].find("span", class_="titleline")
+                if titlelink:
+                    title = titlelink.find("a")
+                    if title:
+                        wordTitle = title.text
+                        titleUrl = title["href"]
+
+                        # Create a dictionary for each article
+                        article = {'title': wordTitle, 'url': titleUrl}
+                        hacker_news_articles.append(article)
+                else:
+                    print("Title nor link not found")
+
                     # Extract comments
                     # if subline:
                     #     sublineContent = subline[i].findChildren("a")
@@ -47,11 +54,17 @@ def getHackerNewsResults():
                     #             getHackerNewsComment(url + itemLink)
                     # else:
                     #     print("Subline not found")
+
+            # Return the list of articles
+            return hacker_news_articles
+
         else:
             print(f"Failed to fetch content from {url}")
     except requests.exceptions.RequestException as e:
         print(f"Error fetching content: {e}")
-        return
+        return []  # Return an empty list in case of errors
+
+    return []  # Return an empty list if no data is found
 
 def getHackerNewsComment(url):
     print(url)
@@ -76,6 +89,12 @@ def getHackerNewsComment(url):
     
 def main():
     getHackerNewsResults()
+
+@app.route('/')
+def index():
+    hacker_news_articles = getHackerNewsResults()
+
+    return render_template('index.html', hacker_news_articles=hacker_news_articles)
         
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
