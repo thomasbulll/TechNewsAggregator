@@ -27,6 +27,13 @@ def fetch_local_parsed_html(url):
     except IOError as e:
         print(f"Error fetching content: {e}")
         return
+
+def trim_title(title):
+    max_length = 125
+    truncated_text = title[:max_length - 3]
+    print(title)
+    print(f"{truncated_text}...")
+    return f"{truncated_text}..."
     
 def fetch_business_insider_top_articles(url):
     soup = fetch_parsed_html(url)
@@ -36,6 +43,8 @@ def fetch_business_insider_top_articles(url):
         article = articles[i]
         article_title = article.text
         title_url = "https://www.businessinsider.com" + article["href"]
+        if len(article_title) > 120:
+            article_title = trim_title(article_title)
         business_article = {'title': article_title, 'url': title_url}
         business_insider_articles.append(business_article)
     return business_insider_articles
@@ -44,12 +53,16 @@ def fetch_tech_crunch_top_articles(url):
     soup = fetch_parsed_html(url)
     tech_crunch_articles = []
     articles = soup.find_all("a", class_="post-block__title__link")
+    unique_article_urls = set()
     i = 0
-    while len(tech_crunch_articles) <= 5:
+    while len(tech_crunch_articles) <= 4:
         article = articles[i]
         article_title = article.text
         title_url = article["href"]
-        if len(article_title.strip()) > 0:
+        if len(article_title.strip()) > 0 and title_url not in unique_article_urls:
+            unique_article_urls.add(title_url)
+            if len(article_title) > 120:
+                article_title = trim_title(article_title)
             tc_article = {'title': article_title, 'url': title_url}
             tech_crunch_articles.append(tc_article)
         i += 1
@@ -66,7 +79,10 @@ def fetch_cnn_top_articles(url):
         if title_tag:
             article_title = title_tag.text
             article_url = "https://edition.cnn.com" + articles[i]["href"]
-            if article_url not in unique_article_urls:
+            # Removes articles from other topics as they are also displayed on tech page
+            if articles[i]["href"][12:16] == "tech" and article_url not in unique_article_urls:
+                if len(article_title) > 120:
+                    article_title = trim_title(article_title)
                 unique_article_urls.add(article_url)
                 article = {'title': article_title, 'url': article_url}
                 cnn_articles.append(article)
@@ -95,6 +111,8 @@ def fetch_bbc_top_articles(url):
                 title_url = "https://www.bbc.co.uk" + title_tag["href"]
                 article_title = article_elements[c].text
                 # Create a dictionary for each article
+                if len(article_title) > 120:
+                    article_title = trim_title(article_title)
                 article = {'title': article_title, 'url': title_url}
                 bbc_news_articles.append(article)
     return bbc_news_articles
@@ -111,6 +129,8 @@ def fetch_hacker_news_top_articles(url):
             if title:
                 article_title = title.text
                 article_url = title["href"]
+                if len(article_title) > 120:
+                    article_title = trim_title(article_title)
                 article_data = {"title": article_title, "url": article_url}
                 hacker_news_articles.append(article_data)
         else:
