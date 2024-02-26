@@ -31,8 +31,6 @@ def fetch_local_parsed_html(url):
 def trim_title(title):
     max_length = 125
     truncated_text = title[:max_length - 3]
-    print(title)
-    print(f"{truncated_text}...")
     return f"{truncated_text}..."
     
 def fetch_business_insider_top_articles(url):
@@ -152,7 +150,6 @@ def get_hacker_news_subline(url, subline):
             fetch_hacker_news_comments(url + item_link)
 
 def fetch_hacker_news_comments(url):
-    print(url)
     try:
         response = requests.get(url)
         if response.status_code == 200:
