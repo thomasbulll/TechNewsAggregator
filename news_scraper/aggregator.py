@@ -1,6 +1,35 @@
 import requests
 from bs4 import BeautifulSoup
 
+def getCNNResults():
+    url = "https://edition.cnn.com/business/tech"
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            page_content = response.text
+            soup = BeautifulSoup(page_content, "html.parser")
+            cnn_articles = []
+            articles = soup.find_all("a", class_="container__link")
+            i = 0
+            urlSet = set()
+            while len(cnn_articles) <= 4:
+                titleTag = articles[i].find("span", class_="container__headline-text")
+                if titleTag:
+                    wordTitle = titleTag.text
+                    titleUrl = "https://edition.cnn.com" + articles[i]["href"]
+                    if titleUrl not in urlSet:
+                        urlSet.add(titleUrl)
+                        article = {'title': wordTitle, 'url': titleUrl}
+                        cnn_articles.append(article)
+                i += 1
+            return cnn_articles
+        else:
+            print(f"Failed to fetch content from {url}")
+            return []
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching CNN content: {e}")
+        return []
+    
 def getBbcNewsResutls():
     url = "https://www.bbc.co.uk/news/technology"
     try:
