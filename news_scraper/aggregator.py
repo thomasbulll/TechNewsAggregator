@@ -54,7 +54,7 @@ def fetch_bbc_top_articles():
                for c in range(len(article_elements)):
                    if c % 2 == 0 and article_elements[c].text is not None:
                        title_tag = article_tags[i]
-                       title_url = title_tag["href"]
+                       title_url = "https://www.bbc.co.uk" + title_tag["href"]
                        article_title = article_elements[c].text
                        # Create a dictionary for each article
                        article = {'title': article_title, 'url': title_url}

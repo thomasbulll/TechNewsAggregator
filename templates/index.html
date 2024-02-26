@@ -2,44 +2,73 @@
 <html>
 <head>
   <title>News Aggregator</title>
-  <link rel="stylesheet" href="../static/style.css">  
-</head>
+  <link rel="stylesheet" href="../static/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>  </head>
 <body>
+  
+  <div class="filters">
+    <label for="hacker-news">
+      <input type="checkbox" id="hacker-news" checked> Hacker News
+    </label>
+    <label for="bbc-news">
+      <input type="checkbox" id="bbc-news" checked> BBC News
+    </label>
+    <label for="cnn-news">
+      <input type="checkbox" id="cnn-news" checked> CNN News
+    </label>
+  </div>
 
-  <h2>News Sources</h2>
+  <div class="container">
+    <section id="hacker-news-section">
+      <h1>Hacker News Articles</h1>
+      <ul>
+        {% for article in hacker_news_articles %}
+          <article>
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </article>
+        {% endfor %}
+      </ul>
+    </section>
 
-  <section>
-    <h1>Hacker News Articles</h1>
-    <ul>
-      {% for article in hacker_news_articles %}
-        <article>
-          <a href="{{ article.url }}">{{ article.title }}</a>
-        </article>
-      {% endfor %}
-    </ul>
-  </section>
+    <section id="bbc-news-section">
+      <h1>BBC News Articles</h1>
+      <ul>
+        {% for article in bbc_news_articles %}
+          <article>
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </article>
+        {% endfor %}
+      </ul>
+    </section>
 
-  <section>
-    <h1>BBC News Articles</h1>
-    <ul>
-      {% for article in bbc_news_articles %}
-        <article>
-          <a href="{{ article.url }}">{{ article.title }}</a>
-        </article>
-      {% endfor %}
-    </ul>
-  </section>
+    <section id="cnn-news-section">
+      <h1>CNN News Articles</h1>
+      <ul>
+        {% for article in cnn_news_articles %}
+          <article>
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </article>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
 
-  <section>
-    <h1>CNN News Articles</h1>
-    <ul>
-      {% for article in cnn_news_articles %}
-        <article>
-          <a href="{{ article.url }}">{{ article.title }}</a>
-        </article>
-      {% endfor %}
-    </ul>
-  </section>
+  <script>
+    $(document).ready(function() {
+      // Initial filtering (all sections visible)
+      $(".container section").show();
+
+      // Event listener for checkbox changes
+      $(".filters input[type='checkbox']").change(function() {
+        var sectionId = $(this).attr("id") + "-section";  // Get corresponding section ID
+        if ($(this).is(":checked")) {
+          $("#" + sectionId).show();  // Show section if checkbox is checked
+        } else {
+          $("#" + sectionId).hide();  // Hide section if checkbox is unchecked
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>

@@ -1,26 +1,67 @@
 body {
-    font-family: Arial, sans-serif;
-  }
-  
-  h1, h2 {
-    margin-bottom: 10px;
-  }
-  
-  section {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-  }
-  
-  article {
-    margin-bottom: 5px;
-  }
-  
-  a {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+section {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  width: 33%;
+}
+
+article {
+  margin-bottom: 5px;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+article {
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 2%;
+  padding: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.filters label {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.filters input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  appearance: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.filters input[type="checkbox"]:checked {
+  background-color: #333;
+  color: #fff;
+}
