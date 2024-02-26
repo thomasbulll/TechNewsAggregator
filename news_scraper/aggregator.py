@@ -21,7 +21,7 @@ def fetch_parsed_html(url):
     
 def fetch_local_parsed_html(url):
     try:
-        with open("path/to/your/file.html", "r") as f:
+        with open(url, "r") as f:
             html_content = f.read()
         return BeautifulSoup(html_content, features="html.parser")
     except IOError as e:
@@ -48,7 +48,7 @@ def fetch_tech_crunch_top_articles(url):
     while len(tech_crunch_articles) <= 5:
         article = articles[i]
         article_title = article.text
-        title_url = "https://techcrunch.com" + article["href"]
+        title_url = article["href"]
         if len(article_title.strip()) > 0:
             tc_article = {'title': article_title, 'url': title_url}
             tech_crunch_articles.append(tc_article)
