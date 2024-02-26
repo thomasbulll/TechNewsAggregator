@@ -11,5 +11,12 @@
         <li><a href="{{ article.url }}">{{ article.title }}</a></li>
         {% endfor %}
     </ul>
+
+    <h1>BBC News Articles</h1>
+    <ul>
+        {% for article in bbc_news_articles %}
+        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
