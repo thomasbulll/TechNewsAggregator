@@ -104,7 +104,7 @@ def fetch_hacker_news_top_articles():
         return []
 
 def get_hacker_news_subline(url, subline):
-    subline_content = subline[i].findChildren("a")
+    subline_content = subline.findChildren("a")
     for item in subline_content:
         item_link = item["href"]
         if item_link.startswith("item"):

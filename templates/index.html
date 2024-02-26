@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>News Aggregator</title>
+  <title>News Aggregator</title>
+  <link rel="stylesheet" href="../static/style.css">  
 </head>
 <body>
 
+  <h2>News Sources</h2>
+
+  <section>
     <h1>Hacker News Articles</h1>
     <ul>
-        {% for article in hacker_news_articles %}
-        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
-        {% endfor %}
+      {% for article in hacker_news_articles %}
+        <article>
+          <a href="{{ article.url }}">{{ article.title }}</a>
+        </article>
+      {% endfor %}
     </ul>
+  </section>
 
+  <section>
     <h1>BBC News Articles</h1>
     <ul>
-        {% for article in bbc_news_articles %}
-        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
-        {% endfor %}
+      {% for article in bbc_news_articles %}
+        <article>
+          <a href="{{ article.url }}">{{ article.title }}</a>
+        </article>
+      {% endfor %}
     </ul>
+  </section>
 
+  <section>
     <h1>CNN News Articles</h1>
     <ul>
-        {% for article in cnn_news_articles %}
-        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
-        {% endfor %}
+      {% for article in cnn_news_articles %}
+        <article>
+          <a href="{{ article.url }}">{{ article.title }}</a>
+        </article>
+      {% endfor %}
     </ul>
+  </section>
+
 </body>
 </html>
