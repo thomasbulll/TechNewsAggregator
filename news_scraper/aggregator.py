@@ -27,6 +27,33 @@ def fetch_local_parsed_html(url):
     except IOError as e:
         print(f"Error fetching content: {e}")
         return
+    
+def fetch_business_insider_top_articles(url):
+    soup = fetch_parsed_html(url)
+    business_insider_articles = []
+    articles = soup.find_all("a", class_="tout-title-link")
+    for i in range(0, 5):
+        article = articles[i]
+        article_title = article.text
+        title_url = "https://www.businessinsider.com" + article["href"]
+        business_article = {'title': article_title, 'url': title_url}
+        business_insider_articles.append(business_article)
+    return business_insider_articles
+
+def fetch_tech_crunch_top_articles(url):
+    soup = fetch_parsed_html(url)
+    tech_crunch_articles = []
+    articles = soup.find_all("a", class_="post-block__title__link")
+    i = 0
+    while len(tech_crunch_articles) <= 5:
+        article = articles[i]
+        article_title = article.text
+        title_url = "https://techcrunch.com" + article["href"]
+        if len(article_title.strip()) > 0:
+            tc_article = {'title': article_title, 'url': title_url}
+            tech_crunch_articles.append(tc_article)
+        i += 1
+    return tech_crunch_articles
 
 def fetch_cnn_top_articles(url):
     soup = fetch_parsed_html(url)

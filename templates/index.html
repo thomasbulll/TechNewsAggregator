@@ -16,6 +16,12 @@
     <label for="cnn-news">
       <input type="checkbox" id="cnn-news" checked> CNN News
     </label>
+    <label for="business-insider-news">
+      <input type="checkbox" id="business-insider-news" checked> Business Insider
+    </label>
+    <label for="tech-crunch-news">
+      <input type="checkbox" id="tech-crunch-news" checked> Tech Crunch
+    </label>
   </div>
 
   <div class="container">
@@ -45,6 +51,28 @@
       <h1>CNN News Articles</h1>
       <ul>
         {% for article in cnn_news_articles %}
+          <article>
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </article>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section id="business-insider-news-section">
+      <h1>Business Insider Articles</h1>
+      <ul>
+        {% for article in business_insider_articles %}
+          <article>
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </article>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section id="tech-crunch-news-section">
+      <h1>Tech Crunch Articles</h1>
+      <ul>
+        {% for article in tech_crunch_articles %}
           <article>
             <a href="{{ article.url }}">{{ article.title }}</a>
           </article>
