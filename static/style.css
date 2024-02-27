@@ -74,3 +74,8 @@ article {
   background-color: #333;
   color: #fff;
 }
+
+.article-image {
+  width: 10px;
+  height: 10px;
+}
