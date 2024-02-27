@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from typing import Optional
+from .comment_aggregator import get_hacker_news_subline
 
 def fetch_parsed_html(url):
     try:
@@ -118,7 +118,7 @@ def fetch_bbc_top_articles(url):
 def fetch_hacker_news_top_articles(url):
     soup = fetch_parsed_html(url)
     articles = soup.find_all("tr", class_="athing")
-    # subline = soup.find_all("span", class_="subline")
+    subline = soup.find_all("span", class_="subline")
     hacker_news_articles = []
     for i in range(5):
         title_link = articles[i].find("span", class_="titleline")
@@ -129,46 +129,14 @@ def fetch_hacker_news_top_articles(url):
                 article_url = title["href"]
                 if len(article_title) > 120:
                     article_title = trim_title(article_title)
-                article_data = {"title": article_title, "url": article_url}
+                # Extract comments
+                if subline:
+                    comment_sentiment = get_hacker_news_subline(url, subline[i])
+                article_data = {"title": article_title, "url": article_url, "sentiment": comment_sentiment}
                 hacker_news_articles.append(article_data)
         else:
             print("Title nor link not found")
 
-            # Extract comments
-            # if subline:
-            #     get_hacker_news_subline(url, subline)
-            # else:
-            #     print("Subline not found")
-
     return hacker_news_articles  # Return values directly
 
-def get_hacker_news_subline(url, subline):
-    subline_content = subline.findChildren("a")
-    for item in subline_content:
-        item_link = item["href"]
-        if item_link.startswith("item"):
-            fetch_hacker_news_comments(url + item_link)
-
-def fetch_hacker_news_comments(url):
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            comments = []
-            page_content = response.text
-            soup = BeautifulSoup(page_content, "html.parser")
-            articles = soup.find_all("span", class_="commtext c00")
-            for i in range(0, len(articles)):
-                comment = ""
-                body = articles[i].findChildren()
-                if body:
-                    for segment in body:
-                        comment = comment + " " + segment.text
-                comments.append(comment)
-            return comments
-        else:
-            print(f"Failed to fetch content from {url}")
-            return
-    except requests.exceptions.RequestException as e:
-            print(f"Error fetching content: {e}")
-            return
     

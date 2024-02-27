@@ -10,7 +10,6 @@ def index():
     cnn_news_articles = fetch_cnn_top_articles("https://edition.cnn.com/business/tech")
     business_insider_articles = fetch_business_insider_top_articles("https://www.businessinsider.com/tech")
     tech_crunch_articles = fetch_tech_crunch_top_articles("https://techcrunch.com/")
-    # the_next_web_articles = fetch_the_next_web_top_articles("https://thenextweb.com/")
 
     return render_template('index.html', hacker_news_articles=hacker_news_articles, 
                            bbc_news_articles=bbc_news_articles, 
@@ -19,5 +18,4 @@ def index():
                            tech_crunch_articles=tech_crunch_articles)
         
 if __name__ == "__main__":
-    # fetch_the_next_web_top_articles("https://thenextweb.com/")
     app.run(debug=True)
