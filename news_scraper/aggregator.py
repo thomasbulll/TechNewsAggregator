@@ -3,6 +3,17 @@ from bs4 import BeautifulSoup
 from .comment_aggregator import get_hacker_news_subline
 
 def fetch_parsed_html(url):
+    """
+    Fetches the beautiful soup of a website's url, if the url 
+    belongs to a file url, it will automatically call the 
+    method fetch_local_parsed_html to handle it.
+
+    Args:
+        url: The url of the website / local file we want to scrape
+
+    Returns:
+        The beautiful soup of the given website url
+    """
     try:
         if url[:5] == "https":
             response = requests.get(url)
@@ -20,6 +31,15 @@ def fetch_parsed_html(url):
         return
     
 def fetch_local_parsed_html(url):
+    """
+    Fetches the beautiful soup of local html file
+
+    Args:
+        url: Local html file url
+
+    Returns:
+        The beautiful soup of a given html file
+    """
     try:
         with open(url, "r") as f:
             html_content = f.read()
@@ -34,6 +54,20 @@ def trim_title(title):
     return f"{truncated_text}..."
     
 def fetch_business_insider_top_articles(url):
+    """
+    Fetches the top 5 articles from Business Insider
+
+    Args:
+        url: The URL of the Business Insider website.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an article with the
+        following keys:
+            - title: The title of the article.
+            - url: The URL of the article.
+            - sentiment: The sentiment analysis of the comments (if available).
+    """
+
     soup = fetch_parsed_html(url)
     business_insider_articles = []
     articles = soup.find_all("a", class_="tout-title-link")
@@ -48,6 +82,20 @@ def fetch_business_insider_top_articles(url):
     return business_insider_articles
 
 def fetch_tech_crunch_top_articles(url):
+    """
+    Fetches the top 5 articles from Tech Crunch
+
+    Args:
+        url: The URL of the Tech Crunch website.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an article with the
+        following keys:
+            - title: The title of the article.
+            - url: The URL of the article.
+            - sentiment: The sentiment analysis of the comments (if available).
+    """
+
     soup = fetch_parsed_html(url)
     tech_crunch_articles = []
     articles = soup.find_all("a", class_="post-block__title__link")
@@ -67,6 +115,20 @@ def fetch_tech_crunch_top_articles(url):
     return tech_crunch_articles
 
 def fetch_cnn_top_articles(url):
+    """
+    Fetches the top 5 articles from CNN
+
+    Args:
+        url: The URL of the CNN News website.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an article with the
+        following keys:
+            - title: The title of the article.
+            - url: The URL of the article.
+            - sentiment: The sentiment analysis of the comments (if available).
+    """
+
     soup = fetch_parsed_html(url)
     cnn_articles = []
     articles = soup.find_all("a", class_="container__link")
@@ -88,6 +150,20 @@ def fetch_cnn_top_articles(url):
     return cnn_articles
 
 def fetch_bbc_top_articles(url):
+    """
+    Fetches the top 5 articles from the BBC
+
+    Args:
+        url: The URL of the BBC News website.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an article with the
+        following keys:
+            - title: The title of the article.
+            - url: The URL of the article.
+            - sentiment: The sentiment analysis of the comments (if available).
+    """
+
     soup = fetch_parsed_html(url)
     bbc_news_articles = []
     article_tags = []
@@ -116,6 +192,20 @@ def fetch_bbc_top_articles(url):
     return bbc_news_articles
 
 def fetch_hacker_news_top_articles(url):
+    """
+    Fetches the top 5 articles from Hacker News
+
+    Args:
+        url: The URL of the Hacker News website.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an article with the
+        following keys:
+            - title: The title of the article.
+            - url: The URL of the article.
+            - sentiment: The sentiment analysis of the comments (if available).
+    """
+
     soup = fetch_parsed_html(url)
     articles = soup.find_all("tr", class_="athing")
     subline = soup.find_all("span", class_="subline")

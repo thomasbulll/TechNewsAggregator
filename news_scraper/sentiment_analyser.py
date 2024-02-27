@@ -1,5 +1,4 @@
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import nltk
 
 def analyze_reviews(comments):
     """
