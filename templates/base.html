@@ -25,6 +25,7 @@
       // Event listener for checkbox changes
       $(".filters input[type='checkbox']").change(function() {
         var sectionId = $(this).attr("id") + "-section";
+        console.log("Checkbox Clicked" + sectionId);
         if ($(this).is(":checked")) {
           $("#" + sectionId).show();
         } else {

@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
 {% block filters %}
-<label for="hacker-news">
-  <input type="checkbox" id="hacker-news" checked> Hacker News
+<label for="Hacker News">
+  <input type="checkbox" id="Hacker News" checked> Hacker News
 </label>
-<label for="bbc-news">
-  <input type="checkbox" id="bbc-news" checked> BBC News
+<label for="BBC News">
+  <input type="checkbox" id="BBC News" checked> BBC News
 </label>
-<label for="cnn-news">
-  <input type="checkbox" id="cnn-news" checked> CNN News
+<label for="CNN News">
+  <input type="checkbox" id="CNN News" checked> CNN News
 </label>
-<label for="business-insider-news">
-  <input type="checkbox" id="business-insider-news" checked> Business Insider
+<label for="Business Insider">
+  <input type="checkbox" id="Business Insider" checked> Business Insider
 </label>
-<label for="tech-crunch-news">
-  <input type="checkbox" id="tech-crunch-news" checked> Tech Crunch
+<label for="Tech Crunch">
+  <input type="checkbox" id="Tech Crunch" checked> Tech Crunch
 </label>
   {% endblock %}
 
@@ -25,7 +25,7 @@
 {% endblock %}
 
 {% macro article_section(source_name, articles) %}
-  <section id="{{ source_name }}">
+  <section id="{{ source_name }}-section">
     <h1>{{ source_name }} Articles</h1>
     <ul>
       {% for article in articles %}
