@@ -23,7 +23,10 @@ def analyze_reviews(comments):
             compound_score = scores["compound"]
             commentSum += compound_score
         
-        return commentSum / len(comments)
+        if len(comments) > 0:
+            return commentSum / len(comments)
+        return 0.0
+    
     except Exception as e:
         print("Sentiment failed at ", e)
         return 0.0
