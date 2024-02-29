@@ -77,7 +77,7 @@ def fetch_business_insider_top_articles(url):
         title_url = "https://www.businessinsider.com" + article["href"]
         if len(article_title) > 120:
             article_title = trim_title(article_title)
-        business_article = {'title': article_title, 'url': title_url}
+        business_article = {'title': article_title, 'url': title_url, "sentiment": 0.0}
         business_insider_articles.append(business_article)
     return business_insider_articles
 
@@ -109,7 +109,7 @@ def fetch_tech_crunch_top_articles(url):
             unique_article_urls.add(title_url)
             if len(article_title) > 120:
                 article_title = trim_title(article_title)
-            tc_article = {'title': article_title, 'url': title_url}
+            tc_article = {'title': article_title, 'url': title_url, "sentiment": 0.0}
             tech_crunch_articles.append(tc_article)
         i += 1
     return tech_crunch_articles
@@ -144,7 +144,7 @@ def fetch_cnn_top_articles(url):
                 if len(article_title) > 120:
                     article_title = trim_title(article_title)
                 unique_article_urls.add(article_url)
-                article = {'title': article_title, 'url': article_url}
+                article = {'title': article_title, 'url': article_url, "sentiment": 0.0}
                 cnn_articles.append(article)
         i += 1
     return cnn_articles
@@ -187,7 +187,7 @@ def fetch_bbc_top_articles(url):
                 # Create a dictionary for each article
                 if len(article_title) > 120:
                     article_title = trim_title(article_title)
-                article = {'title': article_title, 'url': title_url}
+                article = {'title': article_title, 'url': title_url, "sentiment": 0.0}
                 bbc_news_articles.append(article)
     return bbc_news_articles
 

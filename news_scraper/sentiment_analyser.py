@@ -14,12 +14,16 @@ def analyze_reviews(comments):
     # Uncomment the line below if VADER lexicon is out of date / unable to load the VADER lexicon
     # nltk.download('vader_lexicon')
 
-    analyzer = SentimentIntensityAnalyzer()
-    commentSum = 0
+    try:
+        analyzer = SentimentIntensityAnalyzer()
+        commentSum = 0
 
-    for comment in comments:
-        scores = analyzer.polarity_scores(comment)
-        compound_score = scores["compound"]
-        commentSum += compound_score
-    
-    return commentSum / len(comments)
+        for comment in comments:
+            scores = analyzer.polarity_scores(comment)
+            compound_score = scores["compound"]
+            commentSum += compound_score
+        
+        return commentSum / len(comments)
+    except Exception as e:
+        print("Sentiment failed at ", e)
+        return 0.0
