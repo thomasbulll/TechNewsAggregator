@@ -1,138 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>News Aggregator</title>
-  <link rel="stylesheet" href="../static/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-</head>
-<body>
-  
-  <div class="filters">
-    <label for="hacker-news">
-      <input type="checkbox" id="hacker-news" checked> Hacker News
-    </label>
-    <label for="bbc-news">
-      <input type="checkbox" id="bbc-news" checked> BBC News
-    </label>
-    <label for="cnn-news">
-      <input type="checkbox" id="cnn-news" checked> CNN News
-    </label>
-    <label for="business-insider-news">
-      <input type="checkbox" id="business-insider-news" checked> Business Insider
-    </label>
-    <label for="tech-crunch-news">
-      <input type="checkbox" id="tech-crunch-news" checked> Tech Crunch
-    </label>
-  </div>
+{% extends "base.html" %}
 
-  <div class="container">
-    <section id="hacker-news-section">
-      <h1>Hacker News Articles</h1>
-      <ul>
-        {% for article in hacker_news_articles %}
-          <article>
-            <a href="{{ article.url }}">{{ article.title }}</a>
-            {% if article.sentiment > 0.05 %}
-            <img src="{{url_for('static', filename='positive.jpeg')}}" alt="Positive sentiment" class="article-image">
-            {% elif article.sentiment < -0.05 %}
-              <img src="{{url_for('static', filename='negative.jpeg')}}" alt="Negative sentiment" class="article-image">
-            {% else %}
-              <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image">
-            {% endif %}
-          </article>
-        {% endfor %}
-      </ul>
-    </section>
+{% block filters %}
+<label for="hacker-news">
+  <input type="checkbox" id="hacker-news" checked> Hacker News
+</label>
+<label for="bbc-news">
+  <input type="checkbox" id="bbc-news" checked> BBC News
+</label>
+<label for="cnn-news">
+  <input type="checkbox" id="cnn-news" checked> CNN News
+</label>
+<label for="business-insider-news">
+  <input type="checkbox" id="business-insider-news" checked> Business Insider
+</label>
+<label for="tech-crunch-news">
+  <input type="checkbox" id="tech-crunch-news" checked> Tech Crunch
+</label>
+  {% endblock %}
 
-    <section id="bbc-news-section">
-      <h1>BBC News Articles</h1>
-      <ul>
-        {% for article in bbc_news_articles %}
-          <article>
-            <a href="{{ article.url }}">{{ article.title }}</a>
-            {% if article.sentiment > 0.05 %}
-            <img src="{{url_for('static', filename='positive.jpeg')}}" alt="Positive sentiment" class="article-image">
-            {% elif article.sentiment < -0.05 %}
-              <img src="{{url_for('static', filename='negative.jpeg')}}" alt="Negative sentiment" class="article-image">
-            {% else %}
-              <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image">
-            {% endif %}
-          </article>
-        {% endfor %}
-      </ul>
-    </section>
+{% block content %}
+  {% for source_name, articles in news_sources.items() %}
+    {{ article_section(source_name, articles) }}
+  {% endfor %}
+{% endblock %}
 
-    <section id="cnn-news-section">
-      <h1>CNN News Articles</h1>
-      <ul>
-        {% for article in cnn_news_articles %}
-          <article>
-            <a href="{{ article.url }}">{{ article.title }}</a>
-            {% if article.sentiment > 0.05 %}
-            <img src="{{url_for('static', filename='positive.jpeg')}}" alt="Positive sentiment" class="article-image">
-            {% elif article.sentiment < -0.05 %}
-              <img src="{{url_for('static', filename='negative.jpeg')}}" alt="Negative sentiment" class="article-image">
-            {% else %}
-              <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image">
-            {% endif %}
-          </article>
-        {% endfor %}
-      </ul>
-    </section>
-
-    <section id="business-insider-news-section">
-      <h1>Business Insider Articles</h1>
-      <ul>
-        {% for article in business_insider_articles %}
-          <article>
-            <a href="{{ article.url }}">{{ article.title }}</a>
-            {% if article.sentiment > 0.05 %}
-            <img src="{{url_for('static', filename='positive.jpeg')}}" alt="Positive sentiment" class="article-image">
-            {% elif article.sentiment < -0.05 %}
-              <img src="{{url_for('static', filename='negative.jpeg')}}" alt="Negative sentiment" class="article-image">
-            {% else %}
-              <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image">
-            {% endif %}
-          </article>
-        {% endfor %}
-      </ul>
-    </section>
-
-    <section id="tech-crunch-news-section">
-      <h1>Tech Crunch Articles</h1>
-      <ul>
-        {% for article in tech_crunch_articles %}
-          <article>
-            <a href="{{ article.url }}">{{ article.title }}</a>
-            {% if article.sentiment > 0.05 %}
-            <img src="{{url_for('static', filename='positive.jpeg')}}" alt="Positive sentiment" class="article-image">
-            {% elif article.sentiment < -0.05 %}
-              <img src="{{url_for('static', filename='negative.jpeg')}}" alt="Negative sentiment" class="article-image">
-            {% else %}
-              <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image">
-            {% endif %}
-          </article>
-        {% endfor %}
-      </ul>
-    </section>
-  </div>
-
-  <script>
-    $(document).ready(function() {
-      // Initial filtering (all sections visible)
-      $(".container section").show();
-
-      // Event listener for checkbox changes
-      $(".filters input[type='checkbox']").change(function() {
-        var sectionId = $(this).attr("id") + "-section";  // Get corresponding section ID
-        if ($(this).is(":checked")) {
-          $("#" + sectionId).show();  // Show section if checkbox is checked
-        } else {
-          $("#" + sectionId).hide();  // Hide section if checkbox is unchecked
-        }
-      });
-    });
-  </script>
-
-</body>
-</html>
+{% macro article_section(source_name, articles) %}
+  <section id="{{ source_name }}">
+    <h1>{{ source_name }} Articles</h1>
+    <ul>
+      {% for article in articles %}
+        <article>
+          <a href="{{ article.url }}">{{ article.title }}</a>
+          {% include 'article_sentiment.html' %}
+        </article>
+      {% endfor %}
+    </ul>
+  </section>
+{% endmacro %}
