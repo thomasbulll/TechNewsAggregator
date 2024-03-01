@@ -22,16 +22,6 @@ section {
   flex-grow: 1; /* Added property */
 }
 
-article {
-  margin-bottom: 5px;
-}
-
-article {
-  margin-bottom: 5px;
-  height: 60px;
-  overflow-y: auto;
-}
-
 a {
   color: #333;
   text-decoration: none;
@@ -43,9 +33,21 @@ a:hover {
 
 article {
   margin-bottom: 5px;
+  height: 60px;
+  overflow-y: auto;
+  margin-bottom: 5px;
   border: 1px solid #ccc;
   border-radius: 2%;
   padding: 10px;
+  display: flex;
+  align-items: center; 
+  width: 100%;
+  justify-content: space-between;
+}
+
+.article-image {
+  width: 25px;
+  height: 25px;
 }
 
 .filters {
@@ -73,9 +75,4 @@ article {
 .filters input[type="checkbox"]:checked {
   background-color: #333;
   color: #fff;
-}
-
-.article-image {
-  width: 10px;
-  height: 10px;
 }
