@@ -1,4 +1,6 @@
-from db_utils import connect_db, retrieve_site_id, get_hash
+import sys
+sys.path.append('../utils/db_utils')
+from utils.db_utils import connect_db, retrieve_site_id, get_hash
 
 def post_all_articles(news_sources):
     for source_name, articles in news_sources.items():

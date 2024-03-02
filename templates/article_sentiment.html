@@ -1,6 +1,6 @@
-{% if article.sentiment > 0.05 %}
+{% if article.sentiment == 'positive' %}
   <img src="{{url_for('static', filename='positive.jpeg')}}" alt="Positive sentiment" class="article-image">
-{% elif article.sentiment < -0.05 %}
+{% elif article.sentiment == 'negative' %}
   <img src="{{url_for('static', filename='negative.jpeg')}}" alt="Negative sentiment" class="article-image">
 {% else %}
   <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image">
