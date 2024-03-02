@@ -2,19 +2,10 @@ import sqlite3
 import hashlib
 import os
 
-# def post_all_articles(news_sources):
-
-#     cur = connection.cursor()
-
-#     for source_name, articles in news_sources.items():
-#         for article in articles:
-#             print(f"\tTitle: {article['title']}")
-#             print(f"\tURL: {article['url']}")
-#             print(f"\tSentiment: {article['sentiment']}")
-#         source_id_map = {}
-#         for source_name in news_sources.keys():
-#             source_id = hashlib.sha256(source_name.encode('utf-8')).hexdigest()
-#             source_id_map[source_name] = source_id
+def post_all_articles(news_sources):
+    for source_name, articles in news_sources.items():
+        for article in articles:
+            post_news_article(article['title'], article['url'], article['sentiment'], source_name)
 
 def connect_db():
     connection = sqlite3.connect('database/database.db')
