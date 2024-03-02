@@ -14,7 +14,7 @@ CREATE TABLE articles (
   article_title TEXT NOT NULL,
   article_hash BLOB NOT NULL UNIQUE,
   article_url TEXT NOT NULL,
-  sentiment TEXT NOT NULL,
+  sentiment TEXT NOT NULL, -- No decimal in sqlite
   site_id INTEGER NOT NULL,
   FOREIGN KEY (site_id) REFERENCES sites(id)
 );
