@@ -10,9 +10,8 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-@app.route("/")
-def index():
-    news_sources = {
+def get_all_articles():
+    return {
         "Hacker News": fetch_hacker_news_top_articles("https://news.ycombinator.com/"),
         "BBC News": fetch_bbc_top_articles("https://www.bbc.co.uk/news/technology"),
         "CNN News": fetch_cnn_top_articles("https://edition.cnn.com/business/tech"),
@@ -21,6 +20,10 @@ def index():
         ),
         "Tech Crunch": fetch_tech_crunch_top_articles("https://techcrunch.com/"),
     }
+
+@app.route("/")
+def index():
+    news_sources = get_all_articles()
     # post_all_articles(news_sources)
     return render_template("index.html", news_sources=news_sources)
 
