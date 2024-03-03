@@ -7,6 +7,13 @@ def post_all_articles(news_sources):
         for article in articles:
             post_news_article(article['title'], article['url'], article['sentiment'], source_name)
 
+def reset_artice_table():
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute('DELETE FROM articles;')
+    conn.commit()
+    conn.close()
+
 # One time use, only use when the data needs to be reset.
 def init_all_news_sites():
     sites = [
