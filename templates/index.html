@@ -1,23 +1,5 @@
 {% extends "base.html" %}
 
-{% block filters %}
-<label for="Hacker News">
-  <input type="checkbox" id="Hacker News" checked> Hacker News
-</label>
-<label for="BBC News">
-  <input type="checkbox" id="BBC News" checked> BBC News
-</label>
-<label for="CNN News">
-  <input type="checkbox" id="CNN News" checked> CNN News
-</label>
-<label for="Business Insider">
-  <input type="checkbox" id="Business Insider" checked> Business Insider
-</label>
-<label for="Tech Crunch">
-  <input type="checkbox" id="Tech Crunch" checked> Tech Crunch
-</label>
-  {% endblock %}
-
 {% block content %}
   {% for source_name, articles in news_sources.items() %}
     {{ article_section(source_name, articles) }}

@@ -30,8 +30,7 @@ scheduler.start()
 
 @app.route("/")
 def index():
-    news_sources = get_articles()
-    return render_template("index.html", news_sources=news_sources)
+    return render_template("index.html", news_sources=get_articles())
 
 if __name__ == "__main__":
     app.run(debug=True)

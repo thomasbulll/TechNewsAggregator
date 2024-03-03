@@ -3,37 +3,13 @@
 <head>
   <title>News Aggregator</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
-
-  <div class="filters">
-    {% block filters %}
-      {% endblock %}
-  </div>
 
   <div class="container">
     {% block content %}
       {% endblock %}
   </div>
-
-  <script>
-    $(document).ready(function() {
-      // Initial filtering (all sections visible)
-      $(".container section").show();
-
-      // Event listener for checkbox changes
-      $(".filters input[type='checkbox']").change(function() {
-        var sectionId = $(this).attr("id") + "-section";
-        console.log("Checkbox Clicked" + sectionId);
-        if ($(this).is(":checked")) {
-          $("#" + sectionId).show();
-        } else {
-          $("#" + sectionId).hide();
-        }
-      });
-    });
-  </script>
 
 </body>
 </html>
