@@ -1,6 +1,7 @@
 import sys
 sys.path.append("..")
 from news_scraper.aggregator import fetch_hacker_news_top_articles, fetch_bbc_top_articles, fetch_cnn_top_articles, fetch_parsed_html
+from test_data.test_data_utl import retrive_test_file_directory
 import pytest
 
 # This test always passes under the assumption
@@ -17,17 +18,17 @@ def test_fetch_parsed_html_failure():
 
 # Pass in complete path and uncomment tests to verify this behaviour
   
-# def test_fetch_bbc_top_articles(fetch_test_bbc_expected_top_articles):
-#   url = "tests\test_data\test_bbc.html"
-#   articles = fetch_bbc_top_articles(url)
-#   assert articles == fetch_test_bbc_expected_top_articles()
+def test_fetch_bbc_top_articles():
+    html_file = retrive_test_file_directory("test_bbc.html")
+    articles = fetch_bbc_top_articles(html_file)
+    assert articles != None
 
-# def test_fetch_cnn_top_articles(fetch_test_expected_top_articles):
-#   url = "tests\test_data\test_cnn.html"
-#   articles = fetch_cnn_top_articles(url)
-#   assert articles == fetch_test_expected_top_articles()
+def test_fetch_cnn_top_articles():
+  html_file = retrive_test_file_directory("test_cnn.html")
+  articles = fetch_cnn_top_articles(html_file)
+  assert articles != None
 
-# def test_fetch_hacker_news_top_articles(fetch_test_expected_top_articles):
-#   url = "test_data/test_hacker_rank.html"
-#   articles = fetch_hacker_news_top_articles(url)
-#   assert articles == fetch_test_expected_top_articles()
+def test_fetch_hacker_news_top_articles():
+  html_file = retrive_test_file_directory("test_hacker_rank.html")
+  articles = fetch_hacker_news_top_articles(html_file)
+  assert articles != None

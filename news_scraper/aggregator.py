@@ -25,7 +25,7 @@ def fetch_parsed_html(url):
                 print(f"Failed to fetch content from {url}")
                 return
         else:
-            fetch_local_parsed_html(url)
+            return fetch_local_parsed_html(url)
     except requests.exceptions.RequestException as e:
         print(f"Error fetching content: {e}")
         return
