@@ -57,22 +57,21 @@ article {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 40%;
   height: 60%;
   margin: 0 auto;
+}
+
+.form-title {
+  padding-bottom: 5%;
 }
 
 .container-form form {
   height: auto; 
 }
 
-.mb-3 {
-  text-align: center;
-  padding-bottom: 2.5%;
-}
-
-.mb-4 {
+.form-field {
   text-align: center;
   padding-bottom: 2.5%;
 }
@@ -90,11 +89,11 @@ article {
   font-family: "Roboto", sans-serif;
   padding: 10px;
   border: 1px solid #ddd;
-  border-radius: 4px; /* Rounded corners like Google buttons */
+  border-radius: 4px;
 }
 
 .btn-primary {
-  margin: 0 auto;
+  transform: translateX(100%);
   background-color: #4285F4;
   color: #fff;
   border-color: #4285F4;

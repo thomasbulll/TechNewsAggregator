@@ -2,11 +2,11 @@
 
 {% block content %}
     <div class="container-form mx-auto w-100 border rounded-2">
-        <h1 class="mb-3">Sign Up</h1>
+        <h1 class="form-title">Sign Up</h1>
         <!--Form-->
         <form method="post" novalidate>
             {{ form.hidden_tag() }}
-            <div class="mb-3">
+            <div class="form-field">
                 <!--Label-->
                 {{ form.username.label(class="form-label") }}
                 <!--Field-->
@@ -21,7 +21,7 @@
                 {% endfor %}
             </div>
 
-            <div class="mb-3">
+            <div class="form-field">
                 <!--Label-->
                 {{ form.email.label(class="form-label") }}
                 <!--Field-->
@@ -37,7 +37,7 @@
             </div>
 
 
-            <div class="mb-3">
+            <div class="form-field">
                 <!--Label-->
                 {{ form.password.label(class="form-label") }}
                 <!--Field-->
@@ -52,7 +52,7 @@
                 {% endfor %}
             </div>
 
-            <div class="mb-4">
+            <div class="form-field">
                 <!--Label-->
                 {{ form.password_repeat.label(class="form-label") }}
                 <!--Field-->
