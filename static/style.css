@@ -50,3 +50,70 @@ article {
   width: 25px;
   height: 25px;
 }
+
+.container-form {
+  top: 50%;
+  transform: translateY(50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  width: 40%;
+  height: 60%;
+  margin: 0 auto;
+}
+
+.container-form form {
+  height: auto; 
+}
+
+.mb-3 {
+  text-align: center;
+  padding-bottom: 2.5%;
+}
+
+.mb-4 {
+  text-align: center;
+  padding-bottom: 2.5%;
+}
+
+
+.form-label,
+.text-muted {
+  padding: 2.5%;
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  text-align: center;
+}
+
+.form-control {
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px; /* Rounded corners like Google buttons */
+}
+
+.btn-primary {
+  margin: 0 auto;
+  background-color: #4285F4;
+  color: #fff;
+  border-color: #4285F4;
+  border-radius: 4px;
+  padding: 10px 20px;
+}
+
+.text-muted a {
+  color: #4285F4;
+}
+
+.btn-primary:hover {
+  cursor: pointer;
+}
+
+.form-label {
+  text-align: center;
+}
+
+.form-control {
+  margin: 0 auto;
+}
