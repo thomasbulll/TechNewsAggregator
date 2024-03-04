@@ -8,9 +8,7 @@
     <!--Navbar-->
     <header class="header">
         <div class="container-fluid">
-            <a class="nav-link" href="{{ url_for('index') }}">
-                <span class="header-title">Top Tech News</span>
-            </a>
+            <a class="nav-link header-title" href="{{ url_for('index') }}">Top Tech News</a>
             <div class="header-buttons">
                 <!--Buttons-->
                 {% if current_user.is_authenticated %}

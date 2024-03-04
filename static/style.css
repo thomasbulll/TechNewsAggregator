@@ -69,13 +69,13 @@ article {
 
 .container-form form {
   height: auto; 
+  margin: 0 auto;
 }
 
 .form-field {
   text-align: center;
   padding-bottom: 2.5%;
 }
-
 
 .form-label,
 .text-muted {
@@ -93,10 +93,9 @@ article {
 }
 
 .btn-primary {
-  transform: translateX(100%);
-  background-color: #4285F4;
-  color: #fff;
-  border-color: #4285F4;
+  background-color: transparent; /* No button background */
+  color: #000; /* Black text color */
+  border: 1px solid #000; /* Black border */
   border-radius: 4px;
   padding: 10px 20px;
 }
@@ -107,6 +106,7 @@ article {
 
 .btn-primary:hover {
   cursor: pointer;
+  background-color: #ddd; /* Light gray background on hover */
 }
 
 .form-label {
@@ -117,34 +117,43 @@ article {
   margin: 0 auto;
 }
 
+.invalid-feedback {
+  color: #ee6464;
+}
+
 .header {
-  background-color: #F0F0F0;
-  padding: 10px 20px;
+  background-color: #fff; /* White background */
+  color: #000; /* Black text color */
+  padding: 15px 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: center; /* Vertically align elements in the center */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+/* Title styles */
 .header-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
-  color: #333;
+  margin-right: 20px; /* Space between title and buttons */
+  font-family: 'Roboto Condensed', sans-serif; /* Example font */
 }
 
+/* Button styles */
 .header-buttons {
-  display: flex;
+  display: inline-flex; /* Inline buttons for horizontal alignment */
 }
 
 .btn-header {
-  margin-left: 10px;
-  background-color: #4285F4;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
+  background-color: transparent; /* No button background */
+  color: #000; /* Black text color */
+  border: 1px solid #000; /* Black border */
+  padding: 5px 12px;
   border-radius: 5px;
+  margin-left: 10px; /* Space between buttons */
   cursor: pointer;
+  text-decoration: none; /* Remove underline on hover */
 }
 
 .btn-header:hover {
-  background-color: #337AB7;
+  background-color: #ddd; /* Light gray background on hover */
 }
