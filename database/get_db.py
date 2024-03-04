@@ -1,6 +1,7 @@
 import sys
 sys.path.append('../utils/db_utils')
 from utils.db_utils import connect_db, retrieve_site_id
+from models import User
 
 def get_articles():
     return {
@@ -63,8 +64,9 @@ def check_login_username(username):
   cur = conn.cursor()
   cur.execute("SELECT * FROM users WHERE username = ?", (username,))
   result = cur.fetchone()
-  if result is not None:
-     return username
+  if result:
+        is_active = True
+        return User(result[0], result[1], result[2], is_active)
   return None
 
 def check_password(username, password_hash):
@@ -72,7 +74,7 @@ def check_password(username, password_hash):
   cur = conn.cursor()
   cur.execute("SELECT username FROM users WHERE password_hash = ?", (password_hash,))
   result = cur.fetchone()
-  if result is not None and result == username:
+  if result and result[0] == username:
      return True
   return False
 
@@ -81,6 +83,6 @@ def get_user_from_id(id):
   cur = conn.cursor()
   cur.execute("SELECT * FROM users WHERE id = ?", (id,))
   result = cur.fetchone()
-  if result is not None:
+  if result:
      return result
   return None

@@ -46,14 +46,11 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-
     form = LoginForm()
 
     if form.validate_on_submit():
         user = check_login_username(form.username.data)
-        if user is None or not check_password(user, get_hash(form.password.data)):
+        if user is None or not check_password(user.username, get_hash(form.password.data)) or not user.is_authenticated:
             flash('Username or password is incorrect', 'danger')
             return redirect(url_for('login'))
         login_user(user, remember=True)
@@ -69,9 +66,6 @@ def logout():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-
     form = SignUpForm()
 
     if form.validate_on_submit():
