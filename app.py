@@ -4,7 +4,7 @@ from database.post_db import post_all_articles, reset_artice_table, post_new_use
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from flask import Flask, render_template, flash, redirect, url_for, request
 from apscheduler.schedulers.background import BackgroundScheduler
-from forms import LoginForm, SignUpForm
+from forms import LoginForm, SignUpForm, EmailNotificationForm
 from utils.db_utils import get_hash, connect_db
 
 app = Flask(__name__)
@@ -76,10 +76,23 @@ def signup():
         return redirect(url_for('login'))
     return render_template('signup.html', form=form)
 
-@app.route('/email-notifications')
-def email_notifications():
+@app.route('/new-email-notifications', methods=['GET', 'POST'])
+def new_email_notifications():
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
+    form = EmailNotificationForm()
+
+    # Validate they don't have more than 5 filters already
+    # Add filter
+    return render_template("new_email_notifications.html", form=form)
+
+@app.route('/users_email_notifications')
+def users_email_notifications():
+    if not current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    # Retrive filters based on the users ID
+
     return render_template("index.html", news_sources=get_articles())
 
 if __name__ == "__main__":

@@ -1,0 +1,27 @@
+<!--  -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-form">
+  <h1 class="form-title">New Notification</h1>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="form-field">
+      {{ form.key_word.label(class="form-label") }}
+      {% if form.key_word.errors %}
+        {{ form.key_word(class='form-control is-invalid') }}
+      {% else %}
+        {{ form.key_word(class='form-control') }}
+      {% endif %}
+      {% for error in form.key_word.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="form-field">
+        {{ form.submit(class="btn btn-primary w-100 mb-5", role="button") }}
+    </div>
+  </form>
+</div>
+{% endblock %}

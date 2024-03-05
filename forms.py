@@ -9,7 +9,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
-
 class SignUpForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -24,3 +23,7 @@ class SignUpForm(FlaskForm):
     def validate_email(self, email: StringField):
         if check_email_exists(email.data) is not None:
             raise ValidationError('Email already exists')
+
+class EmailNotificationForm(FlaskForm):
+    key_word = StringField('Key word to filter', validators=[DataRequired()])
+    submit = SubmitField('Create Email Filter')
