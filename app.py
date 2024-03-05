@@ -56,7 +56,7 @@ def login():
             return redirect(url_for('login'))
         login_user(user, remember=True)
         return redirect(url_for('index'))
-    return render_template('login.html', title='Login', form=form)
+    return render_template('login.html', form=form)
 
 @app.route('/logout')
 def logout():
@@ -74,7 +74,13 @@ def signup():
         post_new_user(form.username.data, form.email.data, get_hash(form.password.data))
         flash('Sign up successfull', 'success')
         return redirect(url_for('login'))
-    return render_template('signup.html', title='Sign Up', form=form)
+    return render_template('signup.html', form=form)
+
+@app.route('/email-notifications')
+def email_notifications():
+    if not current_user.is_authenticated:
+        return redirect(url_for('index'))
+    return render_template("index.html", news_sources=get_articles())
 
 if __name__ == "__main__":
     app.run(debug=True)
