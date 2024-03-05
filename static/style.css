@@ -11,16 +11,18 @@ h1, h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 95vw;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 section {
   margin-bottom: 20px;
   padding-bottom: 10px;
-  width: 15%;
+  width: 20%;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  align-items: center;
 }
 
 a {
@@ -47,13 +49,12 @@ article {
 }
 
 .article-image {
-  width: 25px;
-  height: 25px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
 }
 
 .container-form {
-  top: 50%;
-  transform: translateY(50%);
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
@@ -61,6 +62,24 @@ article {
   width: 40%;
   height: 60%;
   margin: 0 auto;
+}
+
+.flash-messages{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.flash-messages-close{
+  margin: 0 auto;
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+  padding: 5px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .form-title {
@@ -93,9 +112,9 @@ article {
 }
 
 .btn-primary {
-  background-color: transparent; /* No button background */
-  color: #000; /* Black text color */
-  border: 1px solid #000; /* Black border */
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
   border-radius: 4px;
   padding: 10px 20px;
 }
@@ -106,7 +125,7 @@ article {
 
 .btn-primary:hover {
   cursor: pointer;
-  background-color: #ddd; /* Light gray background on hover */
+  background-color: #ddd; 
 }
 
 .form-label {
@@ -122,38 +141,49 @@ article {
 }
 
 .header {
-  background-color: #fff; /* White background */
-  color: #000; /* Black text color */
+  background-color: #fff;
+  color: #000;
   padding: 15px 20px;
   display: flex;
-  align-items: center; /* Vertically align elements in the center */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Title styles */
 .header-title {
   font-size: 22px;
   font-weight: bold;
-  margin-right: 20px; /* Space between title and buttons */
-  font-family: 'Roboto Condensed', sans-serif; /* Example font */
+  margin-right: 20px;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
-/* Button styles */
 .header-buttons {
-  display: inline-flex; /* Inline buttons for horizontal alignment */
+  display: inline-flex;
+}
+
+.header-welcome{
+  background-color: transparent;
+  padding: 5px 12px;
+  border-radius: 5px;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.header-welcome:hover{
+  text-decoration: none;
+  cursor: default;
 }
 
 .btn-header {
-  background-color: transparent; /* No button background */
-  color: #000; /* Black text color */
-  border: 1px solid #000; /* Black border */
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
   padding: 5px 12px;
   border-radius: 5px;
-  margin-left: 10px; /* Space between buttons */
+  margin-left: 10px;
   cursor: pointer;
-  text-decoration: none; /* Remove underline on hover */
+  text-decoration: none;
 }
 
 .btn-header:hover {
-  background-color: #ddd; /* Light gray background on hover */
+  background-color: #ddd;
 }

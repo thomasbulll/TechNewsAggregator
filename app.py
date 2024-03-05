@@ -55,7 +55,6 @@ def login():
             flash('Username or password is incorrect', 'danger')
             return redirect(url_for('login'))
         login_user(user, remember=True)
-        flash('Login successfully', 'success')
         return redirect(url_for('index'))
     return render_template('login.html', title='Login', form=form)
 
@@ -73,7 +72,7 @@ def signup():
     form = SignUpForm()
     if form.validate_on_submit():
         post_new_user(form.username.data, form.email.data, get_hash(form.password.data))
-        flash('Sign up successfully', 'success')
+        flash('Sign up successfull', 'success')
         return redirect(url_for('login'))
     return render_template('signup.html', title='Sign Up', form=form)
 
