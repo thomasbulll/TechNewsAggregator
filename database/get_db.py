@@ -84,5 +84,6 @@ def get_user_from_id(id):
   cur.execute("SELECT * FROM users WHERE id = ?", (id,))
   result = cur.fetchone()
   if result:
-     return result
+      is_active = True
+      return User(result[0], result[1], result[2], is_active)
   return None

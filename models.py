@@ -8,6 +8,9 @@ class User:
     def __repr__(self):
         return f'User: {self.username}'
     
+    def username(self):
+        return self.username
+    
     def get_id(self):
         return str(self.id)
     

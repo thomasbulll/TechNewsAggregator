@@ -12,6 +12,7 @@
             <div class="header-buttons">
                 <!--Buttons-->
                 {% if current_user.is_authenticated %}
+                    <p>Welcome, {{ current_user.username }}</p>
                     <a role="button" class="btn btn-header" href="{{ url_for('logout') }}">Logout</a>
                 {% else %}
                     <a role="button" class="btn btn-header" href="{{ url_for('login') }}">Login</a>

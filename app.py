@@ -46,8 +46,9 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = LoginForm()
-
     if form.validate_on_submit():
         user = check_login_username(form.username.data)
         if user is None or not check_password(user.username, get_hash(form.password.data)) or not user.is_authenticated:
@@ -56,18 +57,20 @@ def login():
         login_user(user, remember=True)
         flash('Login successfully', 'success')
         return redirect(url_for('index'))
-
     return render_template('login.html', title='Login', form=form)
 
 @app.route('/logout')
 def logout():
+    if not current_user.is_authenticated:
+        return redirect(url_for('index'))
     logout_user()
     return redirect(url_for('index'))
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = SignUpForm()
-
     if form.validate_on_submit():
         post_new_user(form.username.data, form.email.data, get_hash(form.password.data))
         flash('Sign up successfully', 'success')
