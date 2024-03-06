@@ -19,4 +19,3 @@ class User:
     
     def is_authenticated(self):
         return self.is_active
-

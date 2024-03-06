@@ -27,6 +27,19 @@ def get_all_filters_per_user(email):
         filters.append(filter)
     return filters
 
+def get_all_filters():
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM email_filters")
+    results = cur.fetchall()
+    if results is None:
+        return None
+    filters = []
+    for result in results:
+        filter = {'key_word': result[1], 'email': result[2]}
+        filters.append(filter)
+    return filters
+
 def get_count_filters_per_user(email):
     conn = connect_db()
     cur = conn.cursor()
