@@ -11,3 +11,10 @@ def post_new_user(username, email, password_hash):
 
     finally:
         conn.close()
+    
+def delete_specific_user_by_id(id):
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM users WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
