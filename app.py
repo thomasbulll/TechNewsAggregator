@@ -85,24 +85,20 @@ def new_email_notifications():
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
     form = EmailNotificationForm()
-    # if form.validate_on_submit():
-    #     if get_count_filters_per_user(current_user.get_email) >= 5:
-    #         flash('Too many filters already', 'error')
-    #         return redirect(url_for('users_email_notifications'))
-    #     else:
-    #         insert_new_email_filter(form.key_word.data, current_user.get_email)
-    #         flash('New email filter created', 'success')
+    if form.validate_on_submit():
+        if get_count_filters_per_user(current_user.email) >= 5:
+            flash('Too many filters already', 'error')
+            return redirect(url_for('users_email_notifications'))
+        else:
+            insert_new_email_filter(form.key_word.data, current_user.email)
+            flash('New email filter created', 'success')
     return render_template("new_email_notifications.html", form=form)
 
 @app.route('/users_email_notifications')
 def users_email_notifications():
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
-    
-    # filters = get_all_filters_per_user(current_user.get_email)
-    filters = [{'id': 1, 'key_word': "word1"}, {'id': 2, 'key_word': "word2"}]
-
-    return render_template("users_email_notifications.html", filters=filters)
+    return render_template("users_email_notifications.html", filters=get_all_filters_per_user(current_user.email))
 
 if __name__ == "__main__":
     app.run(debug=True)
