@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-form">
+    <h1 class="form-title">{{ current_user.username }}'s Email Notifications</h1>
+    {% for filter in filters %}
+        <filter>
+            {{filter.key_word}}
+        </filter>
+    {% endfor %}
+</div>
+{% endblock %}
+

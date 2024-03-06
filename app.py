@@ -1,6 +1,8 @@
 from news_scraper.aggregator import fetch_hacker_news_top_articles, fetch_bbc_top_articles, fetch_cnn_top_articles, fetch_business_insider_top_articles, fetch_tech_crunch_top_articles
+from database.email_filters.get_email_filters import get_all_filters_per_user, get_count_filters_per_user
 from database.get_db import get_articles, check_login_username, check_password, get_user_from_id
 from database.post_db import post_all_articles, reset_artice_table, post_new_user
+from database.email_filters.post_email_filters import insert_new_email_filter
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from flask import Flask, render_template, flash, redirect, url_for, request
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -81,9 +83,13 @@ def new_email_notifications():
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
     form = EmailNotificationForm()
-
-    # Validate they don't have more than 5 filters already
-    # Add filter
+    # if form.validate_on_submit():
+    #     if get_count_filters_per_user(current_user.get_email) >= 5:
+    #         flash('Too many filters already', 'error')
+    #         return redirect(url_for('users_email_notifications'))
+    #     else:
+    #         insert_new_email_filter(form.key_word.data, current_user.get_email)
+    #         flash('New email filter created', 'success')
     return render_template("new_email_notifications.html", form=form)
 
 @app.route('/users_email_notifications')
@@ -91,9 +97,10 @@ def users_email_notifications():
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
     
-    # Retrive filters based on the users ID
+    # filters = get_all_filters_per_user(current_user.get_email)
+    filters = [{'id': 1, 'key_word': "word1"}, {'id': 2, 'key_word': "word2"}]
 
-    return render_template("index.html", news_sources=get_articles())
+    return render_template("users_email_notifications.html", filters=filters)
 
 if __name__ == "__main__":
     app.run(debug=True)

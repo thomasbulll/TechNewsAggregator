@@ -14,6 +14,9 @@ class User:
     def get_id(self):
         return str(self.id)
     
+    def get_email(self):
+        return self.email
+    
     def is_authenticated(self):
         return self.is_active
 
