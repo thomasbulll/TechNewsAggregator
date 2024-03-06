@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from database.get_db import check_email_exists, check_username_exists
+from database.user.get_user import check_email_exists, check_username_exists
 
 
 class LoginForm(FlaskForm):

@@ -1,13 +1,15 @@
 from news_scraper.aggregator import fetch_hacker_news_top_articles, fetch_bbc_top_articles, fetch_cnn_top_articles, fetch_business_insider_top_articles, fetch_tech_crunch_top_articles
 from database.email_filters.get_email_filters import get_all_filters_per_user, get_count_filters_per_user
-from database.get_db import get_articles, check_login_username, check_password, get_user_from_id
-from database.post_db import post_all_articles, reset_artice_table, post_new_user
-from database.email_filters.post_email_filters import insert_new_email_filter
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
+from database.user.get_user import check_login_username, check_password, get_user_from_id
+from database.email_filters.post_email_filters import insert_new_email_filter
 from flask import Flask, render_template, flash, redirect, url_for, request
+from database.post_db import post_all_articles, reset_artice_table
 from apscheduler.schedulers.background import BackgroundScheduler
 from forms import LoginForm, SignUpForm, EmailNotificationForm
+from database.user.post_user import post_new_user
 from utils.db_utils import get_hash, connect_db
+from database.get_db import get_articles
 
 app = Flask(__name__)
 
