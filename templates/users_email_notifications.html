@@ -2,12 +2,21 @@
 
 {% block content %}
 <div class="container-form">
-    <h1 class="form-title">{{ current_user.username }}'s Email Notifications</h1>
-    {% for filter in filters %}
-        <filter>
-            {{filter.key_word}}
-        </filter>
-    {% endfor %}
+  <h1>{{ current_user.username }}'s Email Notifications</h1>
+  {% if not filters %}
+    <p class="no-filters-text">You don't have any email filters yet.</p>
+  {% else %}
+    <ul>
+      {% for filter in filters %}
+        <li class="filter">
+          {{ filter.key_word }}
+          <form method="POST" action="{{ url_for('delete_filter', filter_id=filter.id) }}">
+            <input type="hidden" name="filter_id" value="{{ filter.id }}">
+            <button type="submit" class="btn-header">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 </div>
 {% endblock %}
-

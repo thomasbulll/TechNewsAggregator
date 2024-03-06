@@ -1,8 +1,8 @@
 from news_scraper.aggregator import fetch_hacker_news_top_articles, fetch_bbc_top_articles, fetch_cnn_top_articles, fetch_business_insider_top_articles, fetch_tech_crunch_top_articles
+from database.email_filters.post_email_filters import insert_new_email_filter, delete_specific_email_filter_by_id
 from database.email_filters.get_email_filters import get_all_filters_per_user, get_count_filters_per_user
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from database.user.get_user import check_login_username, check_password, get_user_from_id
-from database.email_filters.post_email_filters import insert_new_email_filter
 from flask import Flask, render_template, flash, redirect, url_for, request
 from database.post_db import post_all_articles, reset_artice_table
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -92,6 +92,7 @@ def new_email_notifications():
         else:
             insert_new_email_filter(form.key_word.data, current_user.email)
             flash('New email filter created', 'success')
+            return redirect(url_for('users_email_notifications'))
     return render_template("new_email_notifications.html", form=form)
 
 @app.route('/users_email_notifications')
@@ -99,6 +100,13 @@ def users_email_notifications():
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
     return render_template("users_email_notifications.html", filters=get_all_filters_per_user(current_user.email))
+
+@app.route('/delete_filter/<int:filter_id>', methods=['POST'])
+def delete_filter(filter_id):
+    deleted = delete_specific_email_filter_by_id(filter_id, current_user.email)
+    if not deleted:
+        flash('Email Filter NOT  Deleted', 'failure')
+    return redirect(url_for('users_email_notifications'))
 
 if __name__ == "__main__":
     app.run(debug=True)

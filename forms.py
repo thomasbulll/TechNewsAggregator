@@ -27,3 +27,6 @@ class SignUpForm(FlaskForm):
 class EmailNotificationForm(FlaskForm):
     key_word = StringField('Key word to filter', validators=[DataRequired()])
     submit = SubmitField('Create Email Filter')
+
+class DeleteEmailNotificationForm(FlaskForm):
+  submit = SubmitField('Delete')
