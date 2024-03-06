@@ -10,7 +10,8 @@ from forms import LoginForm, SignUpForm, EmailNotificationForm
 from email_notifications import check_all_filters
 from database.user.post_user import post_new_user
 from utils.db_utils import get_hash, connect_db
-from database.get_db import get_articles
+from database.get_db import get_articles, get_all_hashes
+from short_form_content import generate_short_videos
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'your_generated_secret_key'
@@ -37,9 +38,12 @@ def get_all_articles():
 # and fill it with the new articles once an hour.
 def get_new_articles():
     print("GET NEW ARTICLES")
+    old_hashes = get_all_hashes()
     reset_artice_table()
     post_all_articles(get_all_articles())
-    check_all_filters()
+    # check_all_filters()
+    new_hashes = get_all_hashes()
+    generate_short_videos(old_hashes, new_hashes)
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(get_new_articles, 'interval', hours=1)
@@ -47,7 +51,10 @@ scheduler.start()
 
 @app.route("/")
 def index():
-    check_all_filters()
+    old_hashes = get_all_hashes()
+    new_hashes = get_all_hashes()
+    generate_short_videos(old_hashes, new_hashes)
+    # check_all_filters()
     return render_template("index.html", news_sources=get_articles())
 
 @app.route('/login', methods=['GET', 'POST'])

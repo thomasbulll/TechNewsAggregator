@@ -35,3 +35,24 @@ def get_articles_by_site_id(site):
     article_dicts.append(article_dict)
 
   return article_dicts
+
+def get_all_hashes():
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("SELECT article_hash FROM articles")
+    results = cur.fetchall()
+    hashes = []
+    for result in results:
+       hashes.append(result[0])
+    return hashes
+
+def get_article_by_hash(hash):
+  conn = connect_db()
+  cur = conn.cursor()
+  cur.execute("SELECT * FROM articles WHERE article_hash id = ?", (hash,))
+  result = cur.fetchone()
+  return {
+    "title": result[1],
+    "url": result[3],
+  }
+
