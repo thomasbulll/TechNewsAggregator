@@ -12,9 +12,14 @@ from database.user.post_user import post_new_user
 from utils.db_utils import get_hash, connect_db
 from database.get_db import get_articles, get_all_hashes
 from short_form_content import generate_short_videos
+from dotenv import load_dotenv
+import os
+
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'your_generated_secret_key'
+load_dotenv()
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 't35T!K3y53CR3T??'
 
 login = LoginManager()
 login.init_app(app)
