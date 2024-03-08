@@ -229,4 +229,6 @@ def fetch_hacker_news_top_articles(url):
 
     return hacker_news_articles  # Return values directly
 
+# create method for wired news
+
     
