@@ -229,4 +229,35 @@ def fetch_hacker_news_top_articles(url):
 
     return hacker_news_articles  # Return values directly
 
-    
+
+def fetch_sky_news_top_articles(url):
+    """
+    Fetches the top 5 articles from Sky News
+
+    Args:
+        url: The URL of the Sky News website.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an article with the
+        following keys:
+            - title: The title of the article.
+            - url: The URL of the article.
+            - sentiment: The sentiment analysis of the comments (if available).
+    """
+
+    soup = fetch_parsed_html(url)
+    articles = soup.find_all("div", class_="grid-cell")
+    sky_news_articles = []
+    for i in range(5):
+        title_link = articles[i].find("a")
+        if title_link:
+            article_title = title_link.text
+            article_url = title_link["href"]
+            if len(article_title) > 120:
+                article_title = trim_title(article_title)
+            article_data = {"title": article_title, "url": article_url, "sentiment": 0.0}
+            sky_news_articles.append(article_data)
+        else:
+            print("Title nor link not found")
+
+    return sky_news_articles  # Return values directly
