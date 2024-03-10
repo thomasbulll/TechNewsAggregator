@@ -8,7 +8,9 @@
 
 {% macro article_section(source_name, articles) %}
   <section id="{{ source_name }}-section">
-    <h1>{{ source_name }} Articles</h1>
+    <a href="{{sources.get(source_name)}}">
+      <h1>{{ source_name }} Articles</h1>
+    </a>
     <ul>
       {% for article in articles %}
         <article>

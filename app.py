@@ -61,7 +61,18 @@ def index():
     new_hashes = get_all_hashes()
     generate_short_videos(old_hashes, new_hashes)
     # check_all_filters()
-    return render_template("index.html", news_sources=get_articles())
+    sources = {
+        "Hacker News": "https://news.ycombinator.com/",
+        "BBC News": "https://www.bbc.co.uk/news/technology",
+        "CNN News": "https://edition.cnn.com/business/tech",
+        "Business Insider": "https://www.businessinsider.com/tech",
+        "Tech Crunch": "https://techcrunch.com/",
+        "Sky News": "https://news.sky.com/technology/",
+        "Wired": "https://www.wired.co.uk/topic/technology/",
+        "Venture Beat": "https://venturebeat.com/",
+    }
+
+    return render_template("index.html", news_sources=get_articles(), sources=sources)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
