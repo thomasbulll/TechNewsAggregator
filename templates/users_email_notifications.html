@@ -4,13 +4,13 @@
 <div class="container-form">
   <h1>{{ current_user.username }}'s Email Notifications</h1>
   {% if not filters %}
-    <p class="no-filters-text">You don't have any email filters yet.</p>
+    <p class="no-filters-text">You don't have any email filters.</p>
   {% else %}
     <ul>
       {% for filter in filters %}
         <li class="filter">
           {{ filter.key_word }}
-          <form method="POST" action="{{ url_for('delete_filter', filter_id=filter.id) }}">
+          <form method="POST" action="{{ url_for('delete_filter', filter_id=filter.id) }}" class="existing-filters">
             <input type="hidden" name="filter_id" value="{{ filter.id }}">
             <button type="submit" class="btn-header">Delete</button>
           </form>
