@@ -229,7 +229,6 @@ def fetch_hacker_news_top_articles(url):
 
     return hacker_news_articles  # Return values directly
 
-
 def fetch_sky_news_top_articles(url):
     """
     Fetches the top 5 articles from Sky News
