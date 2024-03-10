@@ -277,10 +277,6 @@ def fetch_wired_top_articles(url):
     """
 
     soup = fetch_parsed_html(url)
-    if not soup:
-        print("SOOP DONT EXIST")
-    else:
-        print("SOOP EXIST")
     articles = soup.find_all("div", class_="summary-item__content")
     wired_articles = []
     # Start at index 1 to avoid adverts
