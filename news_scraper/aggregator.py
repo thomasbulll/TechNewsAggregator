@@ -277,6 +277,10 @@ def fetch_wired_top_articles(url):
     """
 
     soup = fetch_parsed_html(url)
+    if not soup:
+        print("SOOP DONT EXIST")
+    else:
+        print("SOOP EXIST")
     articles = soup.find_all("div", class_="summary-item__content")
     wired_articles = []
     # Start at index 1 to avoid adverts
@@ -293,3 +297,35 @@ def fetch_wired_top_articles(url):
             print("Title nor link not found")
 
     return wired_articles  # Return values directly
+
+def fetch_venture_beat_top_articles(url):
+    """
+    Fetches the top 5 articles from Venture Beat
+
+    Args:
+        url: The URL of the Venture Beat website.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an article with the
+        following keys:
+            - title: The title of the article.
+            - url: The URL of the article.
+            - sentiment: The sentiment analysis of the comments (if available).
+    """
+
+    soup = fetch_parsed_html(url)
+    articles = soup.find_all("a", class_="ArticleListing__title-link")
+    venture_beat_articles = []
+    for i in range(0, 5):
+        title_link = articles[i]
+        if title_link:
+            article_title = title_link.text
+            article_url = title_link["href"]
+            if len(article_title) > 120:
+                article_title = trim_title(article_title)
+            article_data = {"title": article_title, "url": article_url, "sentiment": 0.0}
+            venture_beat_articles.append(article_data)
+        else:
+            print("Title nor link not found")
+
+    return venture_beat_articles  # Return values directly

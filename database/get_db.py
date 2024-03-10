@@ -11,6 +11,7 @@ def get_articles():
         "Tech Crunch": get_articles_by_site_id("Tech Crunch"),
         "Sky News": get_articles_by_site_id("Sky News"),
         "Wired": get_articles_by_site_id("Wired"),
+        "Venture Beat": get_articles_by_site_id("Venture Beat")
     }
 
 def get_articles_by_site_id(site):

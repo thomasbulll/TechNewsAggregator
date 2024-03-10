@@ -1,4 +1,4 @@
-from news_scraper.aggregator import fetch_hacker_news_top_articles, fetch_bbc_top_articles, fetch_cnn_top_articles, fetch_business_insider_top_articles, fetch_tech_crunch_top_articles, fetch_wired_top_articles, fetch_sky_news_top_articles
+from news_scraper.aggregator import fetch_hacker_news_top_articles, fetch_bbc_top_articles, fetch_cnn_top_articles, fetch_business_insider_top_articles, fetch_tech_crunch_top_articles, fetch_venture_beat_top_articles, fetch_wired_top_articles, fetch_sky_news_top_articles
 from database.email_filters.post_email_filters import insert_new_email_filter, delete_specific_email_filter_by_id
 from database.email_filters.get_email_filters import get_all_filters_per_user, get_count_filters_per_user
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
@@ -36,6 +36,7 @@ def get_all_articles():
         "Tech Crunch": fetch_tech_crunch_top_articles("https://techcrunch.com/"),
         "Sky News": fetch_sky_news_top_articles("https://news.sky.com/technology/"),
         "Wired": fetch_wired_top_articles("https://www.wired.co.uk/topic/technology/"),
+        "Venture Beat": fetch_venture_beat_top_articles("https://venturebeat.com/"),
     }
 
 # Temporary solution, delete all the contents of the articles table
@@ -55,6 +56,7 @@ scheduler.start()
 
 @app.route("/")
 def index():
+    get_new_articles()
     old_hashes = get_all_hashes()
     new_hashes = get_all_hashes()
     generate_short_videos(old_hashes, new_hashes)
