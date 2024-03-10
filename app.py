@@ -44,8 +44,9 @@ def get_all_articles():
 def get_new_articles():
     print("GET NEW ARTICLES")
     old_hashes = get_all_hashes()
+    all_articles = get_all_articles()
     reset_artice_table()
-    post_all_articles(get_all_articles())
+    post_all_articles(all_articles)
     # check_all_filters()
     new_hashes = get_all_hashes()
     # generate_short_videos(old_hashes, new_hashes)
@@ -56,7 +57,6 @@ scheduler.start()
 
 @app.route("/")
 def index():
-    get_new_articles()
     old_hashes = get_all_hashes()
     new_hashes = get_all_hashes()
     generate_short_videos(old_hashes, new_hashes)
