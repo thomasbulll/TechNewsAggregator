@@ -251,7 +251,7 @@ def fetch_sky_news_top_articles(url):
         title_link = articles[i].find("a")
         if title_link:
             article_title = title_link.text
-            article_url = title_link["href"]
+            article_url = "https://news.sky.com/technology/" + title_link["href"]
             if len(article_title) > 120:
                 article_title = trim_title(article_title)
             article_data = {"title": article_title, "url": article_url, "sentiment": 0.0}
@@ -284,7 +284,7 @@ def fetch_wired_top_articles(url):
         title_link = articles[i].find("a")
         if title_link:
             article_title = title_link.text
-            article_url = title_link["href"]
+            article_url = "https://www.wired.co.uk/topic/technology/" + title_link["href"]
             if len(article_title) > 120:
                 article_title = trim_title(article_title)
             article_data = {"title": article_title, "url": article_url, "sentiment": 0.0}

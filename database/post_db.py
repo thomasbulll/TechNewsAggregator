@@ -22,6 +22,8 @@ def init_all_news_sites():
     {"title": "CNN News", "url": "https://edition.cnn.com/business/tech"},
     {"title": "Business Insider", "url": "https://www.businessinsider.com/tech"},
     {"title": "Tech Crunch", "url": "https://techcrunch.com/"},
+    {"title": "Sky News", "url": "https://news.sky.com/technology/"},
+    {"title": "Wired", "url": "https://www.wired.co.uk/topic/technology/"},
     ]
 
     for site in sites:

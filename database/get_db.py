@@ -9,6 +9,8 @@ def get_articles():
         "CNN News": get_articles_by_site_id("CNN News"),
         "Business Insider": get_articles_by_site_id("Business Insider"),
         "Tech Crunch": get_articles_by_site_id("Tech Crunch"),
+        "Sky News": get_articles_by_site_id("Sky News"),
+        "Wired": get_articles_by_site_id("Wired"),
     }
 
 def get_articles_by_site_id(site):
