@@ -6,13 +6,16 @@ def check_all_filters():
     filters = get_all_filters()
     pending_emails = []
     all_filters = {}
+    
+    # Put all the email filters in a hashmap, with the key being the filter
+    # and the value being the list of user emails where they want to filter that key.
     for filter in filters:
-        all_filters[filter.key_word.lower()] = all_filters.get(filter.key_word.lower()).append(filter.email)
-    # Loop through the different news site's articles
-    for articles in get_articles():
-        # Loop through the articles
+        all_filters[filter.key_word.lower()] = all_filters.get(filter.key_word.lower(), []).append(filter.email)
+
+    # Loop through the different news site's articles e.g. BBC News, CNN etc...
+    for articles in get_all_articles():
+        # Loop through the articles from that single source
         for article in articles:
-            print(str(type(article)))
             title = article.title
             words = title.split()
             # Loop through the title to check if the word is within
@@ -26,7 +29,8 @@ def check_all_filters():
         print(filter.title)
         print(filter.email)
         
-def get_articles():
+def get_all_articles():
     return [get_articles_by_site_id("Hacker News"), get_articles_by_site_id("BBC News"),
             get_articles_by_site_id("CNN News"), get_articles_by_site_id("Business Insider"),
-            get_articles_by_site_id("Tech Crunch")]
+            get_articles_by_site_id("Tech Crunch"), get_articles_by_site_id("Sky News"),
+            get_articles_by_site_id("Wired"), get_articles_by_site_id("Venture Beat")]
