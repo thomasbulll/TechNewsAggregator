@@ -49,6 +49,7 @@ def get_new_articles():
     post_all_articles(all_articles)
     # check_all_filters()
     new_hashes = get_all_hashes()
+    # check_all_filters(old_hashes, new_hashes)
     # generate_short_videos(old_hashes, new_hashes)
 
 scheduler = BackgroundScheduler()
