@@ -312,7 +312,8 @@ def fetch_venture_beat_top_articles(url):
     soup = fetch_parsed_html(url)
     articles = soup.find_all("a", class_="ArticleListing__title-link")
     venture_beat_articles = []
-    for i in range(0, 5):
+    # Start at index 1 to avoid adverts
+    for i in range(1, 6):
         title_link = articles[i]
         if title_link:
             article_title = title_link.text
