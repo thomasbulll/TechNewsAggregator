@@ -1,6 +1,6 @@
 import sys
 sys.path.append("..")
-from news_scraper.aggregator import fetch_hacker_news_top_articles, fetch_bbc_top_articles, fetch_cnn_top_articles, fetch_parsed_html, fetch_tech_crunch_top_articles, fetch_business_insider_top_articles, fetch_sky_news_top_articles, fetch_wired_top_articles
+from news_scraper.aggregator import fetch_hacker_news_top_articles, fetch_bbc_top_articles, fetch_cnn_top_articles, fetch_parsed_html, fetch_tech_crunch_top_articles, fetch_business_insider_top_articles, fetch_sky_news_top_articles, fetch_wired_top_articles, fetch_venture_beat_top_articles
 from test_data.test_data_utl import retrive_test_file_directory
 import pytest
 
@@ -49,4 +49,9 @@ def test_fetch_sky_news_top_articles():
 def test_fetch_wired_top_articles():
   html_file = retrive_test_file_directory("test_wired.html")
   articles = fetch_wired_top_articles(html_file)
+  assert articles != None
+
+def test_fetch_venture_beat_top_articles():
+  html_file = retrive_test_file_directory("test_venture_beat.html")
+  articles = fetch_venture_beat_top_articles(html_file)
   assert articles != None
