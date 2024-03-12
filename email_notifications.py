@@ -22,29 +22,26 @@ def check_all_filters(old_hashes, new_hashes):
         print("check_all_filters error: No filters")
         return
     
-    all_filters = {}
-    
-    # Put all the email filters in a hashmap, with the key being the filter
-    # and the value being the list of user emails where they want to filter that key.
-    for filter in filters:
-        all_filters[filter['key_word'].lower()] = all_filters.get(filter['key_word'].lower(), []).append(filter['email'])
-    
-    find_correct_recipients(new_articles, all_filters)
-
+    find_correct_recipients(new_articles, filters)
 
 def find_correct_recipients(articles, filters):
     pending_emails = []
 
-    # Loop through the new articles
+    # n - The number of articles
+    # k - The number of filters
+    # j - The number of words in an article's title
+    # Time complexity - O(n*k*j)
+
     for article in articles:
-        title = article['title']
+        title = article['title'].lower()
         words = title.split()
         # Loop through the title to check if the word is within
         for word in words:
+            word = word.lower()
             if filters.get(word) is not None:
                 # Loop through all the users that have that filter
                 for email in filters.get(word):
-                    notification = {'title': article['title'], 'url':article['url'], 'email':email}
+                    notification = {'title': title, 'url':article['url'], 'email':email}
                     pending_emails.append(notification)
 
     return pending_emails
