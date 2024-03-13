@@ -25,6 +25,18 @@ def check_all_filters(old_hashes, new_hashes):
     find_correct_recipients(new_articles, filters)
 
 def find_correct_recipients(articles, filters):
+    """
+    Retrives any possible article that the user would like to filter
+    based on an email filte that they have supplied.
+
+    Args:
+        articles: A list of dictionaries, with url and title as the keys.
+        filters: A dictionary, with the keyword as the key and a list of users as the value
+
+    Returns:
+        A list of dictionaries, with the users email, article title and url as the keys.
+        The dictionaries represent each email that needs to  be sent.
+    """
     pending_emails = []
 
     # n - The number of articles
