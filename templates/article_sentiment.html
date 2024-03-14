@@ -5,5 +5,5 @@
 {% elif article.sentiment == 'neutral' %}
   <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image" data-toggle="tooltip" data-placement="top" title="Neutral Sentiment">
 {% elif article.sentiment == 'none' %}
-  <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image" data-toggle="tooltip" data-placement="top" title="Unable to retrive sentiment">
+  <img src="{{url_for('static', filename='none.png')}}" alt="Neutral sentiment" class="article-image-none" data-toggle="tooltip" data-placement="top" title="Unable to retrive sentiment">
 {% endif %}
