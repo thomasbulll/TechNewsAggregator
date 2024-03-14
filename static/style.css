@@ -199,6 +199,11 @@ article {
   padding-top: 5%;
 }
 
-.existing-filters{
+.existing-filters {
   display: inline-block;
+}
+
+.new-email-div {
+  padding-top: 5%;
+  text-align: center;
 }
