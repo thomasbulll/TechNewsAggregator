@@ -2,6 +2,8 @@
   <img src="{{url_for('static', filename='positive.jpeg')}}" alt="Positive sentiment" class="article-image" data-toggle="tooltip" data-placement="top" title="Positive Sentiment">
 {% elif article.sentiment == 'negative' %}
   <img src="{{url_for('static', filename='negative.jpeg')}}" alt="Negative sentiment" class="article-image" data-toggle="tooltip" data-placement="top" title="Negative Sentiment">
-{% else %}
-  <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image" data-toggle="tooltip" data-placement="top" title="Neutral Sentiment (or unable to find overall sentiment for this article)">
+{% elif article.sentiment == 'neutral' %}
+  <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image" data-toggle="tooltip" data-placement="top" title="Neutral Sentiment">
+{% elif article.sentiment == 'none' %}
+  <img src="{{url_for('static', filename='neutral.jpeg')}}" alt="Neutral sentiment" class="article-image" data-toggle="tooltip" data-placement="top" title="Unable to retrive sentiment">
 {% endif %}

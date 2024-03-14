@@ -77,7 +77,7 @@ def fetch_business_insider_top_articles(url):
         title_url = "https://www.businessinsider.com" + article["href"]
         if len(article_title) > 120:
             article_title = trim_title(article_title)
-        business_article = {'title': article_title, 'url': title_url, "sentiment": 0.0}
+        business_article = {'title': article_title, 'url': title_url, "sentiment": 9.9}
         business_insider_articles.append(business_article)
     return business_insider_articles
 
@@ -109,7 +109,7 @@ def fetch_tech_crunch_top_articles(url):
             unique_article_urls.add(title_url)
             if len(article_title) > 120:
                 article_title = trim_title(article_title)
-            tc_article = {'title': article_title, 'url': title_url, "sentiment": 0.0}
+            tc_article = {'title': article_title, 'url': title_url, "sentiment": 9.9}
             tech_crunch_articles.append(tc_article)
         i += 1
     return tech_crunch_articles
@@ -144,7 +144,7 @@ def fetch_cnn_top_articles(url):
                 if len(article_title) > 120:
                     article_title = trim_title(article_title)
                 unique_article_urls.add(article_url)
-                article = {'title': article_title, 'url': article_url, "sentiment": 0.0}
+                article = {'title': article_title, 'url': article_url, "sentiment": 9.9}
                 cnn_articles.append(article)
         i += 1
     return cnn_articles
@@ -187,7 +187,7 @@ def fetch_bbc_top_articles(url):
                 # Create a dictionary for each article
                 if len(article_title) > 120:
                     article_title = trim_title(article_title)
-                article = {'title': article_title, 'url': title_url, "sentiment": 0.0}
+                article = {'title': article_title, 'url': title_url, "sentiment": 9.9}
                 bbc_news_articles.append(article)
     return bbc_news_articles
 
@@ -254,7 +254,7 @@ def fetch_sky_news_top_articles(url):
             article_url = "https://news.sky.com/technology/" + title_link["href"]
             if len(article_title) > 120:
                 article_title = trim_title(article_title)
-            article_data = {"title": article_title, "url": article_url, "sentiment": 0.0}
+            article_data = {"title": article_title, "url": article_url, "sentiment": 9.9}
             sky_news_articles.append(article_data)
         else:
             print("Title nor link not found")
@@ -287,7 +287,7 @@ def fetch_wired_top_articles(url):
             article_url = "https://www.wired.co.uk/topic/technology/" + title_link["href"]
             if len(article_title) > 120:
                 article_title = trim_title(article_title)
-            article_data = {"title": article_title, "url": article_url, "sentiment": 0.0}
+            article_data = {"title": article_title, "url": article_url, "sentiment": 9.9}
             wired_articles.append(article_data)
         else:
             print("Title nor link not found")
@@ -320,7 +320,7 @@ def fetch_venture_beat_top_articles(url):
             article_url = title_link["href"]
             if len(article_title) > 120:
                 article_title = trim_title(article_title)
-            article_data = {"title": article_title, "url": article_url, "sentiment": 0.0}
+            article_data = {"title": article_title, "url": article_url, "sentiment": 9.9}
             venture_beat_articles.append(article_data)
         else:
             print("Title nor link not found")

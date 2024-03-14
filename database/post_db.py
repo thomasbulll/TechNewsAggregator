@@ -41,10 +41,12 @@ def post_news_article(title, url, sentiment, site_title):
 
         sentiment_title = ''
 
-        if sentiment > 0.05:
-            sentiment_title = "positive"
+        if sentiment > 9:
+            sentiment_title = "none"
         elif sentiment < -0.05:
             sentiment_title = "negative"
+        elif sentiment < 0.05 :
+            sentiment_title = "positive"
         else:
             sentiment_title = "neutral"
 

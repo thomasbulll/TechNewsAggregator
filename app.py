@@ -58,9 +58,10 @@ scheduler.start()
 
 @app.route("/")
 def index():
-    old_hashes = get_all_hashes()
-    new_hashes = get_all_hashes()
-    generate_short_videos(old_hashes, new_hashes)
+    # old_hashes = get_all_hashes()
+    # new_hashes = get_all_hashes()
+    get_new_articles()
+    # generate_short_videos(old_hashes, new_hashes)
     # check_all_filters()
     sources = {
         "Hacker News": "https://news.ycombinator.com/",

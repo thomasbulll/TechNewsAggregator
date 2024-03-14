@@ -1,5 +1,5 @@
 from database.email_filters.get_email_filters import get_all_filters
-from database.get_db import get_articles_by_site_id, get_article_by_hash
+from database.get_db import get_article_by_hash
 
 def find_new_articles(old_hashes, new_hashes):
     article_hashes =  list(set(new_hashes) - set(old_hashes))
@@ -8,7 +8,6 @@ def find_new_articles(old_hashes, new_hashes):
         new_articles.append(get_article_by_hash(article_hash))
     return new_articles
 
-# Terrible temporary solution
 def check_all_filters(old_hashes, new_hashes):
 
     # Only check the new articles.
