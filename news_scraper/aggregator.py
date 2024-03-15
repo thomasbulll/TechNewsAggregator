@@ -329,3 +329,19 @@ def fetch_venture_beat_top_articles(url):
             print("Title nor link not found")
 
     return venture_beat_articles  # Return values directly
+
+# Currently reddit loads it's posts dynamically, so can only retrieve a maximum of
+# three posts.
+def fetch_reddit_top_articles(url, offset):
+    soup = fetch_parsed_html(url)
+    articles = soup.find_all("shreddit-post")
+    reddit_articles = []
+    max_offset = offset + 5
+    if len(articles) < max_offset:
+        max_offset = len(articles)
+    for i in range(offset, max_offset):
+        link = articles[i].find("a", class_="text-neutral-content-strong")
+        if link:
+            article_data = {"title": link.text, "url": link["href"], "sentiment": 9.9} 
+            reddit_articles.append(article_data) 
+    return reddit_articles
