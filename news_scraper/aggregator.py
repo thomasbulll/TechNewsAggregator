@@ -327,7 +327,6 @@ def fetch_venture_beat_top_articles(url):
             venture_beat_articles.append(article_data)
         else:
             print("Title nor link not found")
-
     return venture_beat_articles  # Return values directly
 
 # Currently reddit loads it's posts dynamically, so can only retrieve a maximum of
