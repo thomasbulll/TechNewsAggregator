@@ -55,3 +55,18 @@ def test_fetch_venture_beat_top_articles():
   html_file = retrive_test_file_directory("test_venture_beat.html")
   articles = fetch_venture_beat_top_articles(html_file)
   assert len(articles) == 5
+
+def test_fetch_reddit_top_articles():
+  html_file = retrive_test_file_directory("test_reddit.html")
+  articles = fetch_reddit_top_articles(html_file, 0)
+  assert len(articles) == 5
+
+def test_fetch_reddit_top_articles_offset():
+  html_file = retrive_test_file_directory("test_reddit.html")
+  articles = fetch_reddit_top_articles(html_file, 2)
+  assert len(articles) == 3
+
+def test_fetch_reddit_top_articles_negative_offset():
+  html_file = retrive_test_file_directory("test_reddit.html")
+  articles = fetch_reddit_top_articles(html_file, -1)
+  assert len(articles) == 5

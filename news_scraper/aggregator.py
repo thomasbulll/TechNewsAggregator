@@ -335,6 +335,8 @@ def fetch_reddit_top_articles(url, offset):
     soup = fetch_parsed_html(url)
     articles = soup.find_all("shreddit-post")
     reddit_articles = []
+    if offset < 0:
+        offset = 0
     max_offset = offset + 5
     if len(articles) < max_offset:
         max_offset = len(articles)
