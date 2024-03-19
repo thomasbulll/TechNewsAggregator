@@ -39,20 +39,20 @@ def get_all_articles():
         "Venture Beat": fetch_venture_beat_top_articles("https://venturebeat.com/"),
         "Reddit Tech News": fetch_reddit_top_articles("https://www.reddit.com/r/technews/", 0),
         "Reddit Tech": fetch_reddit_top_articles("https://www.reddit.com/r/tech/", 0),
-        "Reddit Technology": fetch_reddit_top_articles("https://www.reddit.com/r/technology/", 1),
-        "Reddit Software": fetch_reddit_top_articles("https://www.reddit.com/r/software/", 2),
+        "Reddit Technology": fetch_reddit_top_articles("https://www.reddit.com/r/technology/", 0), # To avoid pinned - set offset to 1 (as of commit date)
+        "Reddit Software": fetch_reddit_top_articles("https://www.reddit.com/r/software/", 0), # To avoid pinned - set offset to 2 (as of commit date)
     }
 
 # Temporary solution, delete all the contents of the articles table
 # and fill it with the new articles once an hour.
 def get_new_articles():
     print("GET NEW ARTICLES")
-    old_hashes = get_all_hashes()
+    # old_hashes = get_all_hashes()
     all_articles = get_all_articles()
     reset_artice_table()
     post_all_articles(all_articles)
     # check_all_filters()
-    new_hashes = get_all_hashes()
+    # new_hashes = get_all_hashes()
     # check_all_filters(old_hashes, new_hashes)
     # generate_short_videos(old_hashes, new_hashes)
 
@@ -62,7 +62,6 @@ scheduler.start()
 
 @app.route("/")
 def index():
-    get_new_articles()
     # get_new_articles()
     # old_hashes = get_all_hashes()
     # new_hashes = get_all_hashes()
