@@ -17,9 +17,9 @@ def test_correct_filters_applied():
   found_matches = find_correct_recipients(articles, filters)
 
   expected_matches = [
-    {'title': 'essential matches here', 'url': 'test2.com', 'email': 'testUser1@test.com'},
-    {'title': 'essential matches here', 'url': 'test2.com', 'email': 'testUser2@test.com'},
-    {'title': 'required matches here', 'url': 'test3.com', 'email': 'testUser1@test.com'}
+    {'title': 'essential matches here', 'url': 'test2.com', 'email': 'testUser1@test.com', 'word':'essential'},
+    {'title': 'essential matches here', 'url': 'test2.com', 'email': 'testUser2@test.com', 'word':'essential'},
+    {'title': 'required matches here', 'url': 'test3.com', 'email': 'testUser1@test.com', 'word':'required'}
   ]
 
   assert found_matches == expected_matches
@@ -43,9 +43,9 @@ def test_correct_filters_applied_wrong_case():
   found_matches = find_correct_recipients(articles, filters)
 
   expected_matches = [
-    {'title': 'essential matches here', 'url': 'test2.com', 'email': 'testUser1@test.com'},
-    {'title': 'essential matches here', 'url': 'test2.com', 'email': 'testUser2@test.com'},
-    {'title': 'required matches here', 'url': 'test3.com', 'email': 'testUser1@test.com'}
+    {'title': 'essential matches here', 'url': 'test2.com', 'email': 'testUser1@test.com', 'word':'essential'},
+    {'title': 'essential matches here', 'url': 'test2.com', 'email': 'testUser2@test.com', 'word':'essential'},
+    {'title': 'required matches here', 'url': 'test3.com', 'email': 'testUser1@test.com', 'word':'required'}
   ]
 
   assert found_matches == expected_matches
