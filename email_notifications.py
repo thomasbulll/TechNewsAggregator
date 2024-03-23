@@ -48,11 +48,11 @@ def find_correct_recipients(articles, filters):
         words = title.split()
         # Loop through the title to check if the word is within
         for word in words:
-            word = word.lower()
-            if filters.get(word) is not None:
+            word_lower = word.lower()
+            if filters.get(word_lower) is not None:
                 # Loop through all the users that have that filter
-                for email in filters.get(word):
-                    notification = {'title': title, 'url':article['url'], 'email':email}
+                for email in filters.get(word_lower):
+                    notification = {'title': title, 'url':article['url'], 'email':email 'word':word}
                     pending_emails.append(notification)
 
     return pending_emails
