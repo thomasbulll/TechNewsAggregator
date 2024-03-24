@@ -1,5 +1,9 @@
 from database.email_filters.get_email_filters import get_all_filters
 from database.get_db import get_article_by_hash
+def send_email(information_array):
+    for information in information_array:
+        print(information['email'])
+
 
 def find_new_articles(old_hashes, new_hashes):
     article_hashes =  list(set(new_hashes) - set(old_hashes))
@@ -8,17 +12,17 @@ def find_new_articles(old_hashes, new_hashes):
         new_articles.append(get_article_by_hash(article_hash))
     return new_articles
 
-def check_all_filters(old_hashes, new_hashes):
+def emails_needed(old_hashes, new_hashes):
 
     # Only check the new articles.
     new_articles = find_new_articles(old_hashes, new_hashes)
     if new_articles is None:
-        print("check_all_filters error: No new articles")
+        print("emails_needed error: No new articles")
         return
     
     filters = get_all_filters()
     if filters is None:
-        print("check_all_filters error: No filters")
+        print("emails_needed error: No filters")
         return
     
     find_correct_recipients(new_articles, filters)
@@ -52,7 +56,7 @@ def find_correct_recipients(articles, filters):
             if filters.get(word_lower) is not None:
                 # Loop through all the users that have that filter
                 for email in filters.get(word_lower):
-                    notification = {'title': title, 'url':article['url'], 'email':email 'word':word}
+                    notification = {'title': title, 'url':article['url'], 'email':email, 'word':word}
                     pending_emails.append(notification)
 
     return pending_emails

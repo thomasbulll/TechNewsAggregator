@@ -7,17 +7,20 @@ from flask import Flask, render_template, flash, redirect, url_for, request
 from database.post_db import post_all_articles, reset_artice_table
 from apscheduler.schedulers.background import BackgroundScheduler
 from forms import LoginForm, SignUpForm, EmailNotificationForm
-from email_notifications import check_all_filters
+from email_notifications import emails_needed
 from database.user.post_user import post_new_user
 from utils.db_utils import get_hash, connect_db
 from database.get_db import get_articles, get_all_hashes
 from short_form_content import generate_short_videos
+from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from config import Config
+import os
 
 app = Flask(__name__)
 load_dotenv()
 app.config.from_object(Config)
+mail = Mail(app)
 login = LoginManager()
 login.init_app(app)
 
@@ -43,6 +46,29 @@ def get_all_articles():
         "Reddit Software": fetch_reddit_top_articles("https://www.reddit.com/r/software/", 0), # To avoid pinned - set offset to 2 (as of commit date)
     }
 
+def get_username(email):
+    at_index = email.find("@")
+    if index > 0:
+        return email[:at_index]
+    else:
+        return None
+
+def send_email(old_hashes, new_hashes):
+    information_array = emails_needed(old_hashes, new_hashes)
+    for information in information_array:
+        username = get_username(information['email'])
+        if username != None:
+            site_url = "127.0.0.1:5000"
+            msg = Message('Test Email', sender=os.environ.get('MAIL_USERNAME'), recipients=[information['email']])
+            html_body = f"""
+                <p>Hi [username],</p>
+                <p>We found a news article that might interest you: <a href="{information['url']}">{information['title']}</a>.
+                You have a notification filter set for the word "{information['word']}" so we thought you wouldn't want to miss this!</p>
+                <p>Don't want to receive these notifications anymore? You can unsubscribe from notification filters <a href="{site_url}/users_email_notifications">Here</a>.</p>
+            """
+            msg.html = html_body
+            mail.send(msg)
+
 # Temporary solution, delete all the contents of the articles table
 # and fill it with the new articles once an hour.
 def get_new_articles():
@@ -51,9 +77,8 @@ def get_new_articles():
     all_articles = get_all_articles()
     reset_artice_table()
     post_all_articles(all_articles)
-    # check_all_filters()
     # new_hashes = get_all_hashes()
-    # check_all_filters(old_hashes, new_hashes)
+    # send_email(old_hashes, new_hashes)
     # generate_short_videos(old_hashes, new_hashes)
 
 scheduler = BackgroundScheduler()
@@ -62,11 +87,6 @@ scheduler.start()
 
 @app.route("/")
 def index():
-    # get_new_articles()
-    # old_hashes = get_all_hashes()
-    # new_hashes = get_all_hashes()
-    # generate_short_videos(old_hashes, new_hashes)
-    # check_all_filters()
     sources = {
         "Hacker News": "https://news.ycombinator.com/",
         "BBC News": "https://www.bbc.co.uk/news/technology",
