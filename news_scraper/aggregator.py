@@ -1,5 +1,5 @@
+from .site_aggregator import extract_bbc_news_article_sentiment, extract_cnn_news_article_sentiment
 from .comment_aggregator import get_hacker_news_subline
-from .site_aggregator import extract_bbc_news_text
 from bs4 import BeautifulSoup
 import requests
 
@@ -145,7 +145,8 @@ def fetch_cnn_top_articles(url):
                 if len(article_title) > 112:
                     article_title = trim_title(article_title)
                 unique_article_urls.add(article_url)
-                article = {'title': article_title, 'url': article_url, "sentiment": 9.9}
+                sentiment = extract_cnn_news_article_sentiment(article_url)
+                article = {'title': article_title, 'url': article_url, "sentiment": sentiment}
                 cnn_articles.append(article)
         i += 1
     return cnn_articles
@@ -185,7 +186,7 @@ def fetch_bbc_top_articles(url):
                 title_tag = article_tags[i]
                 title_url = "https://www.bbc.co.uk" + title_tag["href"]
                 article_title = article_elements[c].text
-                sentiment = extract_bbc_news_text(title_url)
+                sentiment = extract_bbc_news_article_sentiment(title_url)
                 # Create a dictionary for each article
                 if len(article_title) > 112:
                     article_title = trim_title(article_title)
