@@ -1,4 +1,4 @@
-from .site_aggregator import extract_bbc_news_article_sentiment, extract_cnn_news_article_sentiment
+from .site_aggregator import extract_bbc_news_article_sentiment, extract_cnn_news_article_sentiment, extract_tech_crunch_article_sentiment
 from .comment_aggregator import get_hacker_news_subline
 from bs4 import BeautifulSoup
 import requests
@@ -110,7 +110,8 @@ def fetch_tech_crunch_top_articles(url):
             unique_article_urls.add(title_url)
             if len(article_title) > 112:
                 article_title = trim_title(article_title)
-            tc_article = {'title': article_title, 'url': title_url, "sentiment": 9.9}
+            sentiment = extract_tech_crunch_article_sentiment(title_url)
+            tc_article = {'title': article_title, 'url': title_url, "sentiment": sentiment}
             tech_crunch_articles.append(tc_article)
         i += 1
     return tech_crunch_articles
