@@ -1,4 +1,4 @@
-from .comment_aggregator import get_hacker_news_subline, check_if_bbc_contans_comments
+from .comment_aggregator import get_hacker_news_subline
 from bs4 import BeautifulSoup
 import requests
 
@@ -184,8 +184,6 @@ def fetch_bbc_top_articles(url):
                 title_tag = article_tags[i]
                 title_url = "https://www.bbc.co.uk" + title_tag["href"]
                 article_title = article_elements[c].text
-                # sentiment =  check_if_bbc_contans_comments(title_url)
-                # if sentiment is None:
                 sentiment = 9.9
                 # Create a dictionary for each article
                 if len(article_title) > 112:

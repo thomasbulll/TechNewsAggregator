@@ -1,7 +1,5 @@
 from .sentiment_analyser import analyze_reviews
-from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
-from selenium import webdriver
 import requests
 import os
 
@@ -55,28 +53,3 @@ def fetch_hacker_news_comments(url):
             print(f"Error fetching content: {e}")
             return
     
-# Currently can't access the comments
-def check_if_bbc_contans_comments(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        page_content = response.text
-        soup =  BeautifulSoup(page_content, "html.parser")
-        all_spans = soup.find_all("button")
-        for span in all_spans:
-            if span.text == "View comments":
-                return get_all_bbc_news_comments(span['class'], url)
-    return None
-
-def get_all_bbc_news_comments(class_name, url):
-    driver = webdriver.Chrome(os.environ.get('CHROME_DRIVER')) 
-    driver.get(url)
-    button = driver.find_element(By.CLASS_NAME, class_name)
-    button.click()
-    updated_html = driver.page_source
-    soup = BeautifulSoup(updated_html, "html.parser")
-    all_div = soup.find_all("div")
-    bbc_comments = []
-    for div in all_div:
-        if div['class'][14:28] == "CommentBubble":
-            bbc_comments.append(div.text)
-    return analyze_reviews(bbc_comments)
