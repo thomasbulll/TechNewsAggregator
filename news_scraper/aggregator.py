@@ -1,4 +1,4 @@
-from .site_aggregator import extract_bbc_news_article_sentiment, extract_cnn_news_article_sentiment, extract_tech_crunch_article_sentiment, extract_sky_news_article_sentiment
+from .site_aggregator import extract_bbc_news_article_sentiment, extract_cnn_news_article_sentiment, extract_tech_crunch_article_sentiment, extract_sky_news_article_sentiment, extract_wired_article_sentiment
 from .comment_aggregator import get_hacker_news_subline
 from bs4 import BeautifulSoup
 import requests
@@ -289,10 +289,11 @@ def fetch_wired_top_articles(url):
         title_link = articles[i].find("a")
         if title_link:
             article_title = title_link.text
-            article_url = "https://www.wired.co.uk/topic" + title_link["href"]
+            article_url = "https://www.wired.co.uk" + title_link["href"]
             if len(article_title) > 112:
                 article_title = trim_title(article_title)
-            article_data = {"title": article_title, "url": article_url, "sentiment": 9.9}
+            sentiment = extract_wired_article_sentiment(article_url)
+            article_data = {"title": article_title, "url": article_url, "sentiment": sentiment}
             wired_articles.append(article_data)
         else:
             print("Title nor link not found")
