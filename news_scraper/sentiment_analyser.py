@@ -1,5 +1,24 @@
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
+def analyze_article(article):
+    """
+    Analyzes an article comments and classifies it on a scale of -1 to 1 based on sentiment
+    (-1 being more negative, and 1 being positive).
+
+    Args:
+        article: a string containing all the text from the article
+
+    Returns:
+        A sentiment score
+    """
+    try:
+        analyzer = SentimentIntensityAnalyzer()
+        scores = analyzer.polarity_scores(article)
+        return scores["compound"]
+    except Exception as e:
+        print("Sentiment failed at ", e)
+        return 0.0
+
 def analyze_reviews(comments):
     """
     Analyzes a list of article comments and classifies on a scale of -1 to 1 them based on sentiment

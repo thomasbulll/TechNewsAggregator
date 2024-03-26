@@ -1,4 +1,5 @@
 from .comment_aggregator import get_hacker_news_subline
+from .site_aggregator import extract_bbc_news_text
 from bs4 import BeautifulSoup
 import requests
 
@@ -184,7 +185,7 @@ def fetch_bbc_top_articles(url):
                 title_tag = article_tags[i]
                 title_url = "https://www.bbc.co.uk" + title_tag["href"]
                 article_title = article_elements[c].text
-                sentiment = 9.9
+                sentiment = extract_bbc_news_text(title_url)
                 # Create a dictionary for each article
                 if len(article_title) > 112:
                     article_title = trim_title(article_title)

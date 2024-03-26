@@ -39,7 +39,7 @@ def get_all_articles():
         "Tech Crunch": fetch_tech_crunch_top_articles("https://techcrunch.com/"),
         "Sky News": fetch_sky_news_top_articles("https://news.sky.com/technology/"),
         "Wired": fetch_wired_top_articles("https://www.wired.co.uk/topic/technology/"),
-        "Venture Beat": fetch_venture_beat_top_articles("https://venturebeat.com/"),
+        # "Venture Beat": fetch_venture_beat_top_articles("https://venturebeat.com/"),
         "Reddit Tech News": fetch_reddit_top_articles("https://www.reddit.com/r/technews/", 0),
         "Reddit Tech": fetch_reddit_top_articles("https://www.reddit.com/r/tech/", 0),
         "Reddit Technology": fetch_reddit_top_articles("https://www.reddit.com/r/technology/", 0), # To avoid pinned - set offset to 1 (as of commit date)
@@ -87,6 +87,7 @@ scheduler.start()
 
 @app.route("/")
 def index():
+    get_new_articles()
     sources = {
         "Hacker News": "https://news.ycombinator.com/",
         "BBC News": "https://www.bbc.co.uk/news/technology",

@@ -1,7 +1,6 @@
 from .sentiment_analyser import analyze_reviews
 from bs4 import BeautifulSoup
 import requests
-import os
 
 def get_hacker_news_subline(url, subline):
     """
