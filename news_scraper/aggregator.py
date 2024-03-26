@@ -1,4 +1,4 @@
-from .site_aggregator import extract_bbc_news_article_sentiment, extract_cnn_news_article_sentiment, extract_tech_crunch_article_sentiment, extract_sky_news_article_sentiment, extract_business_insider_article_sentiment,  extract_wired_article_sentiment
+from .site_aggregator import extract_bbc_news_article_sentiment, extract_cnn_news_article_sentiment, extract_tech_crunch_article_sentiment, extract_sky_news_article_sentiment, extract_reddit_article_sentiment, extract_business_insider_article_sentiment,  extract_wired_article_sentiment
 from .comment_aggregator import get_hacker_news_subline
 from bs4 import BeautifulSoup
 import requests
@@ -347,9 +347,11 @@ def fetch_reddit_top_articles(url, offset):
     for i in range(offset, max_offset):
         link = articles[i].find("a", class_="text-neutral-content-strong")
         if link:
+            article_url = "https://www.reddit.com" + link["href"]
             article_title = link.text
             if len(article_title) > 112:
                 article_title = trim_title(article_title)
-            article_data = {"title": article_title, "url": link["href"], "sentiment": 9.9} 
+            sentiment = extract_reddit_article_sentiment(article_url)
+            article_data = {"title": article_title, "url": article_url, "sentiment": sentiment} 
             reddit_articles.append(article_data) 
     return reddit_articles

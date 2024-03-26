@@ -87,7 +87,6 @@ scheduler.start()
 
 @app.route("/")
 def index():
-    get_new_articles()
     sources = {
         "Hacker News": "https://news.ycombinator.com/",
         "BBC News": "https://www.bbc.co.uk/news/technology",
