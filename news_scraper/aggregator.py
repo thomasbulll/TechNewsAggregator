@@ -1,4 +1,4 @@
-from .site_aggregator import extract_bbc_news_article_sentiment, extract_cnn_news_article_sentiment, extract_tech_crunch_article_sentiment, extract_sky_news_article_sentiment, extract_reddit_article_sentiment, extract_business_insider_article_sentiment,  extract_wired_article_sentiment
+from .site_aggregator import extract_bbc_news_article_sentiment, extract_generic_article_sentiment, extract_reddit_article_sentiment, extract_business_insider_article_sentiment
 from .comment_aggregator import get_hacker_news_subline
 from bs4 import BeautifulSoup
 import requests
@@ -111,7 +111,7 @@ def fetch_tech_crunch_top_articles(url):
             unique_article_urls.add(title_url)
             if len(article_title) > 112:
                 article_title = trim_title(article_title)
-            sentiment = extract_tech_crunch_article_sentiment(title_url)
+            sentiment = extract_generic_article_sentiment(title_url, "article-content")
             tc_article = {'title': article_title, 'url': title_url, "sentiment": sentiment}
             tech_crunch_articles.append(tc_article)
         i += 1
@@ -147,7 +147,7 @@ def fetch_cnn_top_articles(url):
                 if len(article_title) > 112:
                     article_title = trim_title(article_title)
                 unique_article_urls.add(article_url)
-                sentiment = extract_cnn_news_article_sentiment(article_url)
+                sentiment = extract_generic_article_sentiment(article_url, "article__main")
                 article = {'title': article_title, 'url': article_url, "sentiment": sentiment}
                 cnn_articles.append(article)
         i += 1
@@ -259,7 +259,7 @@ def fetch_sky_news_top_articles(url):
             article_url = "https://news.sky.com" + title_link["href"]
             if len(article_title) > 112:
                 article_title = trim_title(article_title)
-            sentiment = extract_sky_news_article_sentiment(article_url)
+            sentiment = extract_generic_article_sentiment(article_url, "sdc-article-body")
             article_data = {"title": article_title, "url": article_url, "sentiment": sentiment}
             sky_news_articles.append(article_data)
         else:
@@ -293,7 +293,7 @@ def fetch_wired_top_articles(url):
             article_url = "https://www.wired.co.uk" + title_link["href"]
             if len(article_title) > 112:
                 article_title = trim_title(article_title)
-            sentiment = extract_wired_article_sentiment(article_url)
+            sentiment = extract_generic_article_sentiment(article_url, "body__inner-container")
             article_data = {"title": article_title, "url": article_url, "sentiment": sentiment}
             wired_articles.append(article_data)
         else:

@@ -65,7 +65,7 @@ def send_email(old_hashes, new_hashes):
                 <p>We found a news article that might interest you: <a href="{information['url']}">{information['title']}</a>.
                 You have a notification filter set for the word "{information['word']}" so we thought you wouldn't want to miss this!</p>
                 <p>Don't want to receive these notifications anymore? You can unsubscribe from notification filters <a href="{site_url}/users_email_notifications">Here</a>.</p>
-            """
+    """
             msg.html = html_body
             mail.send(msg)
 
