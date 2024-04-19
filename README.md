@@ -18,6 +18,9 @@ This project aggregates news articles from various sources, including:
     
 It currently leverages the [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/) library to parse the HTML content of news websites and extract relevant information.
 
+I also leverage the [Natural Language Toolkit](https://www.nltk.org/) for sentiment analysis on articles, in particular the [Vader](https://www.nltk.org/_modules/nltk/sentiment/vader.html) library.
+
+
 ## Testing ##
 
 Run ```python -m pytest``` for the unit tests
